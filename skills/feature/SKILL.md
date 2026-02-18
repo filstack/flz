@@ -1,6 +1,6 @@
 ---
-name: ai-factory.feature
-description: End-to-end feature development. Creates git branch, plans implementation via /ai-factory.task, then executes via /ai-factory.implement — full cycle without manual steps. Use when user says "new feature", "start feature", "implement feature", or "add feature".
+name: flz.feature
+description: End-to-end feature development. Creates git branch, plans implementation via /flz.task, then executes via /flz.implement — full cycle without manual steps. Use when user says "new feature", "start feature", "implement feature", or "add feature".
 argument-hint: "[--parallel | --list | --cleanup <branch>] <feature description>"
 allowed-tools: Bash(git *) Bash(cd *) Bash(cp *) Bash(mkdir *) Bash(basename *) Read Write Skill AskUserQuestion Questions
 disable-model-invocation: true
@@ -14,7 +14,7 @@ Start a new feature by creating a branch and planning implementation.
 
 ### Step 0: Load Project Context
 
-**FIRST:** Read `.ai-factory/DESCRIPTION.md` if it exists to understand:
+**FIRST:** Read `.flz/DESCRIPTION.md` if it exists to understand:
 - Tech stack (language, framework, database)
 - Project architecture
 - Existing conventions
@@ -46,16 +46,16 @@ Extract flags from `$ARGUMENTS` before parsing the feature description:
 
 **Examples:**
 ```
-/ai-factory.feature --parallel Add user authentication
+/flz.feature --parallel Add user authentication
 → parallel=true, description="Add user authentication"
 
-/ai-factory.feature --list
+/flz.feature --list
 → show all active worktrees, then STOP
 
-/ai-factory.feature --cleanup feature/user-auth
+/flz.feature --cleanup feature/user-auth
 → remove worktree for that branch, then STOP
 
-/ai-factory.feature Add user authentication
+/flz.feature Add user authentication
 → normal flow (unchanged), parallel=false
 ```
 
@@ -103,13 +103,13 @@ Before we start, a few questions:
    - [ ] No, skip tests
 
 2. Update documentation after implementation?
-   - [ ] Yes, update docs (/ai-factory.docs)
+   - [ ] Yes, update docs (/flz.docs)
    - [ ] No, skip docs
 
 3. Any specific requirements or constraints?
 ```
 
-Store the testing and documentation preferences - they will be passed to `/ai-factory.task` and `/ai-factory.implement`.
+Store the testing and documentation preferences - they will be passed to `/flz.task` and `/flz.implement`.
 
 ### Step 4 (Parallel): Create Worktree
 
@@ -155,10 +155,10 @@ Copy these files/directories so the worktree has full AI context:
 WORKTREE="../${DIRNAME}-<branch-name-with-hyphens>"
 
 # Project context
-cp .ai-factory/DESCRIPTION.md "${WORKTREE}/.ai-factory/DESCRIPTION.md" 2>/dev/null
+cp .flz/DESCRIPTION.md "${WORKTREE}/.flz/DESCRIPTION.md" 2>/dev/null
 
 # Past lessons / patches
-cp -r .ai-factory/patches/ "${WORKTREE}/.ai-factory/patches/" 2>/dev/null
+cp -r .flz/patches/ "${WORKTREE}/.flz/patches/" 2>/dev/null
 
 # Claude Code skills + settings (required for Claude Code to work)
 cp -r .claude/ "${WORKTREE}/.claude/" 2>/dev/null
@@ -174,7 +174,7 @@ fi
 #### 4e. Create features directory in worktree
 
 ```bash
-mkdir -p "${WORKTREE}/.ai-factory/features"
+mkdir -p "${WORKTREE}/.flz/features"
 ```
 
 #### 4f. Switch to worktree and continue
@@ -192,11 +192,11 @@ Display a brief confirmation:
   Directory: <worktree-path>
 
 To manage worktrees later:
-  /ai-factory.feature --list
-  /ai-factory.feature --cleanup <branch-name>
+  /flz.feature --list
+  /flz.feature --cleanup <branch-name>
 ```
 
-**Continue to Step 5** — invoke `/ai-factory.task` in the worktree directory to start planning immediately.
+**Continue to Step 5** — invoke `/flz.task` in the worktree directory to start planning immediately.
 
 ### Step 4 (Normal): Create Branch
 
@@ -219,29 +219,29 @@ If branch already exists, ask user:
 
 ```
 Branch: feature/user-authentication
-Plan file: .ai-factory/features/feature-user-authentication.md (NOT .ai-factory/PLAN.md!)
+Plan file: .flz/features/feature-user-authentication.md (NOT .flz/PLAN.md!)
 ```
 
 Convert branch name to filename:
 - Replace `/` with `-`
 - Add `.md` extension
 
-Call `/ai-factory.task` with explicit context:
+Call `/flz.task` with explicit context:
 
 ```
-/ai-factory.task $ARGUMENTS
+/flz.task $ARGUMENTS
 
-CONTEXT FROM /ai-factory.feature:
-- Plan file: .ai-factory/features/feature-user-authentication.md (use this name, NOT .ai-factory/PLAN.md)
+CONTEXT FROM /flz.feature:
+- Plan file: .flz/features/feature-user-authentication.md (use this name, NOT .flz/PLAN.md)
 - Testing: yes/no
 - Logging: verbose/standard/minimal
 ```
 
-**IMPORTANT:** Pass the exact plan filename to /ai-factory.task. This distinguishes feature-based work from direct /ai-factory.task calls.
+**IMPORTANT:** Pass the exact plan filename to /flz.task. This distinguishes feature-based work from direct /flz.task calls.
 
 Pass along:
 - Full feature description
-- **Exact plan file name** (based on branch, e.g., `.ai-factory/features/feature-user-authentication.md`)
+- **Exact plan file name** (based on branch, e.g., `.flz/features/feature-user-authentication.md`)
 - Testing preference
 - Logging preference
 - Any constraints
@@ -249,18 +249,18 @@ Pass along:
 The plan file allows resuming work based on current git branch:
 ```bash
 git branch --show-current  # → feature/user-authentication
-# → Look for .ai-factory/features/feature-user-authentication.md
+# → Look for .flz/features/feature-user-authentication.md
 ```
 
 ### Step 6: Next Action (depends on mode)
 
-**Parallel mode (`--parallel`):** Automatically invoke `/ai-factory.implement` — the whole point of parallel is autonomous end-to-end execution in an isolated worktree.
+**Parallel mode (`--parallel`):** Automatically invoke `/flz.implement` — the whole point of parallel is autonomous end-to-end execution in an isolated worktree.
 
 ```
-/ai-factory.implement
+/flz.implement
 
-CONTEXT FROM /ai-factory.feature:
-- Plan file: .ai-factory/features/<branch-name>.md
+CONTEXT FROM /flz.feature:
+- Plan file: .flz/features/<branch-name>.md
 - Testing: yes/no
 - Logging: verbose/standard/minimal
 - Docs: yes/no
@@ -270,7 +270,7 @@ CONTEXT FROM /ai-factory.feature:
 
 ```
 Plan created! To start implementation:
-/ai-factory.implement
+/flz.implement
 ```
 
 ### Context Cleanup
@@ -296,7 +296,7 @@ git worktree list
 ```
 
 Additionally, for each worktree path from the output:
-1. Check if `<worktree>/.ai-factory/features/` contains any plan files
+1. Check if `<worktree>/.flz/features/` contains any plan files
 2. For each plan file found, show its name and whether it looks complete (has tasks) or is still in progress
 
 **Output format:**
@@ -336,17 +336,17 @@ If the worktree path doesn't exist, check `git worktree list` and suggest the co
 
 ## Examples
 
-**User:** `/ai-factory.feature Add user authentication with email/password and OAuth`
+**User:** `/flz.feature Add user authentication with email/password and OAuth`
 
 **Actions:**
 1. Parse: authentication feature, email/password + OAuth
 2. Generate branch: `feature/user-authentication`
 3. Ask about testing preference
 4. Create branch: `git checkout -b feature/user-authentication`
-5. Call `/ai-factory.task` → creates plan, user reviews
-6. STOP — user runs `/ai-factory.implement` when ready
+5. Call `/flz.task` → creates plan, user reviews
+6. STOP — user runs `/flz.implement` when ready
 
-**User:** `/ai-factory.feature --parallel Add Stripe checkout integration`
+**User:** `/flz.feature --parallel Add Stripe checkout integration`
 
 **Actions:**
 1. Parse flags: `--parallel` found, description = "Add Stripe checkout integration"
@@ -355,19 +355,19 @@ If the worktree path doesn't exist, check `git worktree list` and suggest the co
 4. Get dirname: `my-project`
 5. Create branch: `git branch feature/stripe-checkout main`
 6. Create worktree: `git worktree add ../my-project-feature-stripe-checkout feature/stripe-checkout`
-7. Copy context files (.ai-factory/DESCRIPTION.md, .ai-factory/patches/, .claude/, CLAUDE.md if untracked)
+7. Copy context files (.flz/DESCRIPTION.md, .flz/patches/, .claude/, CLAUDE.md if untracked)
 8. `cd` into worktree
-9. Call `/ai-factory.task` → creates plan, user reviews
-10. Auto-invoke `/ai-factory.implement` → executes the plan (parallel = autonomous)
+9. Call `/flz.task` → creates plan, user reviews
+10. Auto-invoke `/flz.implement` → executes the plan (parallel = autonomous)
 
-**User:** `/ai-factory.feature --list`
+**User:** `/flz.feature --list`
 
 **Actions:**
 1. Run `git worktree list`
-2. Check each worktree for plan files in `.ai-factory/features/`
+2. Check each worktree for plan files in `.flz/features/`
 3. Display formatted list — STOP
 
-**User:** `/ai-factory.feature --cleanup feature/stripe-checkout`
+**User:** `/flz.feature --cleanup feature/stripe-checkout`
 
 **Actions:**
 1. Compute worktree path: `../my-project-feature-stripe-checkout`
@@ -375,15 +375,15 @@ If the worktree path doesn't exist, check `git worktree list` and suggest the co
 3. Run `git branch -d feature/stripe-checkout`
 4. Report result — STOP
 
-**User:** `/ai-factory.feature Fix cart not updating quantities correctly`
+**User:** `/flz.feature Fix cart not updating quantities correctly`
 
 **Actions:**
 1. Parse: bug fix, cart quantities
 2. Generate branch: `fix/cart-quantity-update`
 3. Ask about testing
 4. Create branch
-5. Call `/ai-factory.task` → creates plan, user reviews
-6. STOP — user runs `/ai-factory.implement` when ready
+5. Call `/flz.task` → creates plan, user reviews
+6. STOP — user runs `/flz.implement` when ready
 
 ## Important
 
@@ -410,7 +410,7 @@ Before we start:
    - [ ] Minimal - only WARN/ERROR
 
 3. Update documentation after implementation?
-   - [ ] Yes, update docs (/ai-factory.docs)
+   - [ ] Yes, update docs (/flz.docs)
    - [ ] No, skip docs
 
 4. Any specific requirements or constraints?
@@ -426,4 +426,4 @@ Before we start:
 - Implement log rotation for file-based logs
 - Ensure production can run with minimal logs without code changes
 
-Pass the logging and documentation preferences to `/ai-factory.task` along with testing preference.
+Pass the logging and documentation preferences to `/flz.task` along with testing preference.

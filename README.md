@@ -1,20 +1,20 @@
-![logo](https://github.com/lee-to/ai-factory/raw/main/art/promo.png)
+![logo](https://github.com/lee-to/flz/raw/main/art/promo.png)
 
-# AI Factory
+# FLZ
 
 > **Stop configuring. Start building.**
 
-You want to build with AI, but setting up the right context, prompts, and workflows takes time. AI Factory handles all of that so you can focus on what matters — shipping quality code.
+You want to build with AI, but setting up the right context, prompts, and workflows takes time. FLZ handles all of that so you can focus on what matters — shipping quality code.
 
 **One command. Full AI-powered development environment.**
 
 ```bash
-ai-factory init
+flz init
 ```
 
 ---
 
-## Why AI Factory?
+## Why FLZ?
 
 - **Zero configuration** — detects your stack, installs relevant skills, configures integrations
 - **Best practices built-in** — logging, commits, code review, all following industry standards
@@ -29,19 +29,19 @@ ai-factory init
 
 ### Using npm
 ```bash
-npm install -g ai-factory
+npm install -g flz
 ```
 
 ### Using mise
 ```bash
-mise use -g npm:ai-factory
+mise use -g npm:flz
 ```
 
 ## Quick Start
 
 ```bash
 # In your project directory
-ai-factory init
+flz init
 ```
 
 This will:
@@ -53,7 +53,7 @@ This will:
 Then open your AI agent and start working:
 
 ```
-/ai-factory
+/flz
 ```
 
 
@@ -61,50 +61,50 @@ Then open your AI agent and start working:
 
 If the package is installed:
 ```bash
-ai-factory init
+flz init
 ```
 
 Or running without installation via `npx`:
 ```bash
-npx ai-factory init
+npx flz init
 ```
 
 ### Example Workflow
 
 ```bash
 # Plan a feature — creates branch, analyzes codebase, builds step-by-step plan
-/ai-factory.feature Add user authentication with OAuth
+/flz.feature Add user authentication with OAuth
 
 # Optionally refine the plan with deeper analysis
-/ai-factory.improve
+/flz.improve
 
 # Execute the plan — implements tasks one by one, commits at checkpoints
-/ai-factory.implement
+/flz.implement
 
 # Fix a bug — AI learns from every fix and gets smarter over time
-/ai-factory.fix TypeError: Cannot read property 'name' of undefined
+/flz.fix TypeError: Cannot read property 'name' of undefined
 
 # Set up CI pipeline — GitHub Actions or GitLab CI with linting, SA, tests
-/ai-factory.ci github
+/flz.ci github
 
 # Generate project documentation — README + docs/ with topics
-/ai-factory.docs
+/flz.docs
 ```
 
 See the full [Development Workflow](docs/workflow.md) with diagram and decision table.
 
 ### Auto-Generated Documentation
 
-AI Factory can generate and maintain your project docs with a single command:
+FLZ can generate and maintain your project docs with a single command:
 
 ```bash
-/ai-factory.docs          # Creates README + docs/ structure from your codebase
-/ai-factory.docs --web    # Also generates a static HTML documentation site
+/flz.docs          # Creates README + docs/ structure from your codebase
+/flz.docs --web    # Also generates a static HTML documentation site
 ```
 
 - **Generates docs from scratch** — analyzes your codebase and creates a lean README + detailed `docs/` pages by topic
 - **Cleans up scattered files** — finds loose CONTRIBUTING.md, ARCHITECTURE.md, SETUP.md in your root and consolidates them into a structured `docs/` directory
-- **Keeps docs in sync** — integrates with `/ai-factory.implement` so documentation is updated automatically after each feature
+- **Keeps docs in sync** — integrates with `/flz.implement` so documentation is updated automatically after each feature
 - **Builds a docs website** — `--web` generates a static HTML site with navigation and dark mode, ready to host
 
 ---
@@ -113,16 +113,16 @@ AI Factory can generate and maintain your project docs with a single command:
 
 | Guide | Description |
 |-------|-------------|
-| [Getting Started](docs/getting-started.md) | What is AI Factory, supported agents, CLI commands |
+| [Getting Started](docs/getting-started.md) | What is FLZ, supported agents, CLI commands |
 | [Development Workflow](docs/workflow.md) | Workflow diagram, when to use what, spec-driven approach |
 | [Core Skills](docs/skills.md) | All slash commands — feature, task, fix, implement, evolve, docs, and more |
 | [Plan Files](docs/plan-files.md) | Plan files, self-improvement patches, skill acquisition |
 | [Security](docs/security.md) | Two-level security scanning for external skills |
-| [Configuration](docs/configuration.md) | `.ai-factory.json`, MCP servers, project structure, best practices |
+| [Configuration](docs/configuration.md) | `.flz.json`, MCP servers, project structure, best practices |
 
 ---
 
-![happy](https://github.com/lee-to/ai-factory/raw/main/art/happy.png)
+![happy](https://github.com/lee-to/flz/raw/main/art/happy.png)
 
 ## Links
 

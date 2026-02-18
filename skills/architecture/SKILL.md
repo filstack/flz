@@ -1,5 +1,5 @@
 ---
-name: ai-factory.architecture
+name: flz.architecture
 description: Software architecture patterns and guidelines. Covers Clean Architecture, DDD, microservices, monoliths, and how to choose the right approach. Use when designing systems, refactoring, asking "how should I structure", "which architecture", "monolith vs microservices".
 argument-hint: "[clean|ddd|microservices|monolith|layers]"
 allowed-tools: Read Glob Grep
@@ -11,12 +11,12 @@ Practical guidelines for software architecture decisions.
 
 ## Quick Reference
 
-- `/ai-factory.architecture` — Overview and decision guide
-- `/ai-factory.architecture clean` — Clean Architecture
-- `/ai-factory.architecture ddd` — Domain-Driven Design
-- `/ai-factory.architecture microservices` — Microservices patterns
-- `/ai-factory.architecture monolith` — Modular monolith
-- `/ai-factory.architecture layers` — Layered architecture
+- `/flz.architecture` — Overview and decision guide
+- `/flz.architecture clean` — Clean Architecture
+- `/flz.architecture ddd` — Domain-Driven Design
+- `/flz.architecture microservices` — Microservices patterns
+- `/flz.architecture monolith` — Modular monolith
+- `/flz.architecture layers` — Layered architecture
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: ai-factory.skill-generator
+name: flz.skill-generator
 description: Generate professional Agent Skills for Claude Code and other AI agents. Creates complete skill packages with SKILL.md, references, scripts, and templates. Use when creating new skills, generating custom slash commands, or building reusable AI capabilities. Validates against Agent Skills specification.
 argument-hint: '[skill-name or "search <query>" or URL(s)]'
 allowed-tools: Read Grep Glob Write Bash(mkdir *) Bash(npx skills *) Bash(python *security-scan*) Bash(rm -rf *) WebFetch WebSearch
@@ -149,12 +149,12 @@ Install anyway? [y/N]
 
 ## Quick Commands
 
-- `/ai-factory.skill-generator <name>` - Generate a new skill interactively
-- `/ai-factory.skill-generator <url> [url2] [url3]...` - **Learn Mode**: study URLs and generate a skill from them
-- `/ai-factory.skill-generator search <query>` - Search existing skills on skills.sh for inspiration
-- `/ai-factory.skill-generator scan <path>` - **Security scan**: run two-level security check on a skill
-- `/ai-factory.skill-generator validate <path>` - **Full validation**: structure check + two-level security scan
-- `/ai-factory.skill-generator template <type>` - Get a template (basic, task, reference, visual)
+- `/flz.skill-generator <name>` - Generate a new skill interactively
+- `/flz.skill-generator <url> [url2] [url3]...` - **Learn Mode**: study URLs and generate a skill from them
+- `/flz.skill-generator search <query>` - Search existing skills on skills.sh for inspiration
+- `/flz.skill-generator scan <path>` - **Security scan**: run two-level security check on a skill
+- `/flz.skill-generator validate <path>` - **Full validation**: structure check + two-level security scan
+- `/flz.skill-generator template <type>` - Get a template (basic, task, reference, visual)
 
 ## Argument Detection
 
@@ -172,7 +172,7 @@ Check $ARGUMENTS:
 
 ### Security Scan Mode
 
-**Trigger:** `/ai-factory.skill-generator scan <path>`
+**Trigger:** `/flz.skill-generator scan <path>`
 
 When `$ARGUMENTS` starts with `scan`:
 
@@ -215,7 +215,7 @@ When `$ARGUMENTS` starts with `scan`:
 
 ### Validate Mode
 
-**Trigger:** `/ai-factory.skill-generator validate <path>`
+**Trigger:** `/flz.skill-generator validate <path>`
 
 When `$ARGUMENTS` starts with `validate`:
 
@@ -304,7 +304,7 @@ Follow the [Learn Mode Workflow](references/LEARN-MODE.md).
 4. Synthesize all material into a knowledge base
 5. Ask the user 2-3 targeted questions (skill name, type, customization)
 6. Generate a complete skill package enriched with the learned content
-7. **AUTO-SCAN**: Run `/ai-factory.skill-generator scan <generated-skill-path>` on the result
+7. **AUTO-SCAN**: Run `/flz.skill-generator scan <generated-skill-path>` on the result
 
 If NO URLs and no special command detected — proceed with the standard workflow below.
 

@@ -1,5 +1,5 @@
 ---
-name: ai-factory.review
+name: flz.review
 description: Perform code review on staged changes or a pull request. Checks for bugs, security issues, performance problems, and best practices. Use when user says "review code", "check my code", "review PR", or "is this code okay".
 argument-hint: "[PR number or empty]"
 allowed-tools: Bash(git *) Bash(gh *) Read Glob Grep
@@ -94,13 +94,13 @@ Perform thorough code reviews focusing on correctness, security, performance, an
 
 ## Examples
 
-**User:** `/ai-factory.review`
+**User:** `/flz.review`
 Review staged changes in current repository.
 
-**User:** `/ai-factory.review 123`
+**User:** `/flz.review 123`
 Review PR #123 using GitHub CLI.
 
-**User:** `/ai-factory.review https://github.com/org/repo/pull/123`
+**User:** `/flz.review https://github.com/org/repo/pull/123`
 Review PR from URL.
 
 ## Integration

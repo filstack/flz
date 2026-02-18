@@ -2,9 +2,9 @@
 
 # Security
 
-**Security is a first-class citizen in AI Factory.** Skills downloaded from external sources (skills.sh, GitHub, URLs) can contain prompt injection attacks — malicious instructions hidden inside SKILL.md files that hijack agent behavior, steal credentials, or execute destructive commands.
+**Security is a first-class citizen in FLZ.** Skills downloaded from external sources (skills.sh, GitHub, URLs) can contain prompt injection attacks — malicious instructions hidden inside SKILL.md files that hijack agent behavior, steal credentials, or execute destructive commands.
 
-AI Factory protects against this with a **mandatory two-level security scan** that runs before any external skill is used:
+FLZ protects against this with a **mandatory two-level security scan** that runs before any external skill is used:
 
 ```
 External skill downloaded
@@ -84,6 +84,6 @@ python3 .claude/skills/skill-generator/scripts/security-scan.py ./my-skill/SKILL
 
 ## See Also
 
-- [Core Skills](skills.md) — `/ai-factory.security-checklist` for project-level security audits
+- [Core Skills](skills.md) — `/flz.security-checklist` for project-level security audits
 - [Plan Files](plan-files.md) — skill acquisition strategy and how scanning fits in
 - [Configuration](configuration.md) — MCP servers and project structure

@@ -1,16 +1,16 @@
 ---
-name: ai-factory
+name: flz
 description: Set up Claude Code context for a project. Analyzes tech stack, installs relevant skills from skills.sh, generates custom skills, and configures MCP servers. Use when starting new project, setting up AI context, or asking "set up project", "configure AI", "what skills do I need".
 argument-hint: "[project description]"
 allowed-tools: Read Glob Grep Write Bash(mkdir *) Bash(npx skills *) Bash(python *security-scan*) Bash(rm -rf *) Skill WebFetch AskUserQuestion Questions
 ---
 
-# AI Factory - Project Setup
+# FLZ - Project Setup
 
 Set up Claude Code for your project by:
 1. Analyzing the tech stack
 2. Installing skills from [skills.sh](https://skills.sh)
-3. Generating custom skills via `/ai-factory.skill-generator`
+3. Generating custom skills via `/flz.skill-generator`
 4. Configuring MCP servers for external integrations
 
 ## CRITICAL: Security Scanning
@@ -47,8 +47,8 @@ For each recommended skill:
   3. SECURITY: Scan installed skill → python security-scan.py <path>
      - BLOCKED? → rm -rf <path>, warn user, skip this skill
      - WARNINGS? → show to user, ask confirmation
-  4. If not found → Generate: /ai-factory.skill-generator <name>
-  5. Has reference URLs? → Learn: /ai-factory.skill-generator <url1> [url2]...
+  4. If not found → Generate: /flz.skill-generator <name>
+  5. Has reference URLs? → Learn: /flz.skill-generator <url1> [url2]...
 ```
 
 **Learn Mode:** When you have documentation URLs, API references, or guides relevant to the project — pass them directly to skill-generator. It will study the sources and generate a skill based on real documentation instead of generic patterns. Always prefer Learn Mode when reference material is available.
@@ -72,7 +72,7 @@ Check $ARGUMENTS:
 
 ### Mode 1: Analyze Existing Project
 
-**Trigger:** `/ai-factory` (no arguments) + project has config files
+**Trigger:** `/flz` (no arguments) + project has config files
 
 **Step 1: Scan Project**
 
@@ -86,7 +86,7 @@ Read these files (if they exist):
 - `prisma/schema.prisma` → Database schema
 - Directory structure (`src/`, `app/`, `api/`, etc.)
 
-**Step 2: Generate .ai-factory/DESCRIPTION.md**
+**Step 2: Generate .flz/DESCRIPTION.md**
 
 Based on analysis, create project specification:
 - Detected stack
@@ -137,8 +137,8 @@ Proceed? [Y/n]
 
 **Step 6: Execute**
 
-1. Create directory: `mkdir -p .ai-factory`
-2. Save `.ai-factory/DESCRIPTION.md`
+1. Create directory: `mkdir -p .flz`
+2. Save `.flz/DESCRIPTION.md`
 3. For each external skill from skills.sh:
    ```bash
    npx skills install <name>
@@ -148,7 +148,7 @@ Proceed? [Y/n]
    - Exit 1 (BLOCKED) → `rm -rf <path>`, warn user, skip this skill
    - Exit 2 (WARNINGS) → show to user, ask confirmation
    - Exit 0 (CLEAN) → read files yourself (Level 2), verify intent, proceed
-4. Generate custom skills via `/ai-factory.skill-generator` (pass URLs for Learn Mode when docs are available)
+4. Generate custom skills via `/flz.skill-generator` (pass URLs for Learn Mode when docs are available)
 5. Configure MCP in `{{settings_file}}`
 6. Generate `AGENTS.md` in project root (see [AGENTS.md Generation](#agentsmd-generation))
 
@@ -156,7 +156,7 @@ Proceed? [Y/n]
 
 ### Mode 2: New Project with Description
 
-**Trigger:** `/ai-factory e-commerce with Stripe payments`
+**Trigger:** `/flz e-commerce with Stripe payments`
 
 **Step 1: Interactive Stack Selection**
 
@@ -205,7 +205,7 @@ Based on your project, I recommend:
 - API-only → Fastify/Hono, consider Go for high load
 - Startup/MVP → Next.js + Prisma + Supabase (fast iteration)
 
-**Step 2: Create .ai-factory/DESCRIPTION.md**
+**Step 2: Create .flz/DESCRIPTION.md**
 
 After user confirms choices, create specification:
 
@@ -236,10 +236,10 @@ After user confirms choices, create specification:
 - Security: [relevant security considerations]
 ```
 
-Save to `.ai-factory/DESCRIPTION.md`.
+Save to `.flz/DESCRIPTION.md`.
 
 ```bash
-mkdir -p .ai-factory
+mkdir -p .flz
 ```
 
 **Step 3: Search & Install Skills**
@@ -257,7 +257,7 @@ Install skills, configure MCP, and generate `AGENTS.md` as in Mode 1.
 
 ### Mode 3: Interactive New Project (Empty Directory)
 
-**Trigger:** `/ai-factory` (no arguments) + empty project (no package.json, composer.json, etc.)
+**Trigger:** `/flz` (no arguments) + empty project (no package.json, composer.json, etc.)
 
 **Step 1: Ask Project Description**
 
@@ -278,7 +278,7 @@ After getting description, proceed with same stack selection as Mode 2:
 - Database (with recommendation)
 - ORM (with recommendation)
 
-**Step 3: Create .ai-factory/DESCRIPTION.md**
+**Step 3: Create .flz/DESCRIPTION.md**
 
 Same as Mode 2.
 
@@ -338,7 +338,7 @@ Install skills, configure MCP, and generate `AGENTS.md` as in Mode 1.
 - Read directory tree (top 2-3 levels)
 - Identify key entry points (main files, config files, schemas)
 - Note existing documentation files
-- Reference `.ai-factory/DESCRIPTION.md` for tech stack
+- Reference `.flz/DESCRIPTION.md` for tech stack
 
 **Template:**
 
@@ -378,14 +378,14 @@ Install skills, configure MCP, and generate `AGENTS.md` as in Mode 1.
 | File | Purpose |
 |------|---------|
 | AGENTS.md | This file — project structure map |
-| .ai-factory/DESCRIPTION.md | Project specification and tech stack |
+| .flz/DESCRIPTION.md | Project specification and tech stack |
 | CLAUDE.md | Claude Code instructions and preferences |
 ```
 
 **Rules for AGENTS.md:**
 - Keep it factual — only describe what actually exists in the project
 - Update it when project structure changes significantly
-- The Documentation section will be maintained by `/ai-factory.docs`
+- The Documentation section will be maintained by `/flz.docs`
 - Do NOT duplicate detailed content from DESCRIPTION.md — reference it instead
 
 ---
@@ -407,15 +407,15 @@ After completing setup, tell the user:
 ```
 ✅ Project context configured!
 
-Project description: .ai-factory/DESCRIPTION.md
+Project description: .flz/DESCRIPTION.md
 Project map: AGENTS.md
 Skills installed: [list]
 MCP configured: [list]
 
 To start development:
-- /ai-factory.feature <description> — Start a new feature (creates branch + plan)
-- /ai-factory.task <description> — Create implementation plan only
-- /ai-factory.implement — Execute existing plan
+- /flz.feature <description> — Start a new feature (creates branch + plan)
+- /flz.task <description> — Create implementation plan only
+- /flz.implement — Execute existing plan
 
 Ready when you are!
 ```
@@ -425,19 +425,19 @@ Ready when you are!
 ```
 Your project already has code. You might also want to set up:
 
-- /ai-factory.docs — Generate project documentation
-- /ai-factory.build-automation — Configure build scripts and automation
-- /ai-factory.ci — Set up CI/CD pipeline
-- /ai-factory.dockerize — Containerize the project
+- /flz.docs — Generate project documentation
+- /flz.build-automation — Configure build scripts and automation
+- /flz.ci — Set up CI/CD pipeline
+- /flz.dockerize — Containerize the project
 
 Would you like to run any of these now?
 ```
 
 Present these as `AskUserQuestion` with multi-select options:
-1. Generate docs (`/ai-factory.docs`)
-2. Build automation (`/ai-factory.build-automation`)
-3. CI/CD (`/ai-factory.ci`)
-4. Dockerize (`/ai-factory.dockerize`)
+1. Generate docs (`/flz.docs`)
+2. Build automation (`/flz.build-automation`)
+3. CI/CD (`/flz.ci`)
+4. Dockerize (`/flz.dockerize`)
 5. Skip — I'll do it later
 
 If user selects one or more → invoke the selected skills sequentially.

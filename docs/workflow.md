@@ -2,9 +2,9 @@
 
 # Development Workflow
 
-AI Factory provides a set of **workflow skills** that form the core development loop: plan, improve, implement, fix, evolve. Each skill is a step in the pipeline — they connect to each other and share context through plan files and patches.
+FLZ provides a set of **workflow skills** that form the core development loop: plan, improve, implement, fix, evolve. Each skill is a step in the pipeline — they connect to each other and share context through plan files and patches.
 
-![workflow](https://github.com/lee-to/ai-factory/raw/main/art/workflow.png)
+![workflow](https://github.com/lee-to/flz/raw/main/art/workflow.png)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -13,7 +13,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
 
   ┌──────────────┐      ┌──────────────┐      ┌──────────────────────────┐
   │              │      │    claude    │      │                          │
-  │ ai-factory   │ ───▶ │ (or any AI   │ ───▶ │      /ai-factory         │
+  │ flz   │ ───▶ │ (or any AI   │ ───▶ │      /flz         │
   │    init      │      │    agent)    │      │   (setup context)        │
   │              │      │              │      │                          │
   └──────────────┘      └──────────────┘      └────────────┬─────────────┘
@@ -23,7 +23,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
                           ▼                                ▼                ▼
                ┌──────────────────┐            ┌─────────────────┐  ┌──────────────┐
                │                  │            │                 │  │              │
-               │ /ai-factory.task │            │/ai-factory.     │  │/ai-factory.  │
+               │ /flz.task │            │/flz.     │  │/flz.  │
                │                  │            │    feature      │  │    fix       │
                │  Small tasks     │            │                 │  │              │
                │  No git branch   │            │ Full features   │  │ Bug fixes    │
@@ -33,7 +33,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
                         │                               │                   │
                         │                               │                   ▼
                         │                               │          ┌──────────────────┐
-                        │                               │          │ .ai-factory/     │
+                        │                               │          │ .flz/     │
                         │                               │          │   patches/       │
                         │                               │          │ Self-improvement │
                         └───────────────┬───────────────┘          └────────┬─────────┘
@@ -41,7 +41,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
                                         ▼                                   │
                              ┌─────────────────────┐                        │
                              │                     │                        │
-                             │ /ai-factory.improve │                        │
+                             │ /flz.improve │                        │
                              │    (optional)       │                        │
                              │                     │                        │
                              │ Refine plan with    │                        │
@@ -52,9 +52,9 @@ AI Factory provides a set of **workflow skills** that form the core development 
                                         ▼                                   │
                              ┌──────────────────────┐                       │
                              │                      │◀── reads patches ─────┘
-                             │ /ai-factory.implement│
+                             │ /flz.implement│
                              │ ──── error?          │
-                             │  ──▶ /ai-factory.fix │
+                             │  ──▶ /flz.fix │
                              │  Execute tasks       │
                              │  Commit checkpoints  │
                              │                      │
@@ -63,7 +63,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
                                         ▼
                              ┌──────────────────────┐
                              │                      │
-                             │ /ai-factory.verify   │
+                             │ /flz.verify   │
                              │    (optional)        │
                              │                      │
                              │ Check completeness   │
@@ -77,7 +77,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
                                         ▼
                              ┌─────────────────────┐
                              │                     │
-                             │ /ai-factory.commit  │
+                             │ /flz.commit  │
                              │                     │
                              └──────────┬──────────┘
                                         │
@@ -89,7 +89,7 @@ AI Factory provides a set of **workflow skills** that form the core development 
                                                         ▼
                                              ┌─────────────────────┐
                                              │                     │
-                                             │ /ai-factory.evolve  │
+                                             │ /flz.evolve  │
                                              │                     │
                                              │ Reads patches +     │
                                              │ project context     │
@@ -104,90 +104,90 @@ AI Factory provides a set of **workflow skills** that form the core development 
 
 | Command | Use Case | Creates Branch? | Creates Plan? |
 |---------|----------|-----------------|---------------|
-| `/ai-factory.task` | Small tasks, quick fixes, experiments | No | `.ai-factory/PLAN.md` |
-| `/ai-factory.feature` | Full features, stories, epics | Yes | `.ai-factory/features/<branch>.md` |
-| `/ai-factory.feature --parallel` | Concurrent features via worktrees | Yes + worktree | User runs `/ai-factory.task` in worktree |
-| `/ai-factory.improve` | Refine plan before implementation | No | No (improves existing) |
-| `/ai-factory.fix` | Bug fixes, errors, hotfixes | No | Optional (`.ai-factory/FIX_PLAN.md`) |
-| `/ai-factory.verify` | Post-implementation quality check | No | No (reads existing) |
+| `/flz.task` | Small tasks, quick fixes, experiments | No | `.flz/PLAN.md` |
+| `/flz.feature` | Full features, stories, epics | Yes | `.flz/features/<branch>.md` |
+| `/flz.feature --parallel` | Concurrent features via worktrees | Yes + worktree | User runs `/flz.task` in worktree |
+| `/flz.improve` | Refine plan before implementation | No | No (improves existing) |
+| `/flz.fix` | Bug fixes, errors, hotfixes | No | Optional (`.flz/FIX_PLAN.md`) |
+| `/flz.verify` | Post-implementation quality check | No | No (reads existing) |
 
 ## Workflow Skills
 
 These skills form the development pipeline. Each one feeds into the next.
 
-### `/ai-factory.feature <description>` — start a feature
+### `/flz.feature <description>` — start a feature
 
 ```
-/ai-factory.feature Add user authentication with OAuth
+/flz.feature Add user authentication with OAuth
 ```
 
-Creates a git branch, asks about testing/logging/docs preferences, builds a plan file, and invokes `/ai-factory.task` to break it into steps. For parallel work on multiple features, use `--parallel` to create isolated worktrees.
+Creates a git branch, asks about testing/logging/docs preferences, builds a plan file, and invokes `/flz.task` to break it into steps. For parallel work on multiple features, use `--parallel` to create isolated worktrees.
 
-### `/ai-factory.task <description>` — plan the work
-
-```
-/ai-factory.task Add product search API
-```
-
-Analyzes requirements, explores your codebase for patterns, creates tasks with dependencies, and saves the plan to `.ai-factory/PLAN.md`. For 5+ tasks, includes commit checkpoints.
-
-### `/ai-factory.improve [prompt]` — refine the plan
+### `/flz.task <description>` — plan the work
 
 ```
-/ai-factory.improve
-/ai-factory.improve add validation and error handling
+/flz.task Add product search API
+```
+
+Analyzes requirements, explores your codebase for patterns, creates tasks with dependencies, and saves the plan to `.flz/PLAN.md`. For 5+ tasks, includes commit checkpoints.
+
+### `/flz.improve [prompt]` — refine the plan
+
+```
+/flz.improve
+/flz.improve add validation and error handling
 ```
 
 Second-pass analysis. Finds missing tasks (migrations, configs, middleware), fixes dependencies, removes redundant work. Shows a diff-like report before applying changes.
 
-### `/ai-factory.implement` — execute the plan
+### `/flz.implement` — execute the plan
 
 ```
-/ai-factory.implement        # Continue from where you left off
-/ai-factory.implement 5      # Start from task #5
-/ai-factory.implement status # Check progress
+/flz.implement        # Continue from where you left off
+/flz.implement 5      # Start from task #5
+/flz.implement status # Check progress
 ```
 
-Reads past patches from `.ai-factory/patches/` to learn from previous mistakes, then executes tasks one by one with commit checkpoints. If the plan has `Docs: yes`, runs `/ai-factory.docs` after completion.
+Reads past patches from `.flz/patches/` to learn from previous mistakes, then executes tasks one by one with commit checkpoints. If the plan has `Docs: yes`, runs `/flz.docs` after completion.
 
-### `/ai-factory.verify [--strict]` — check completeness
-
-```
-/ai-factory.verify          # Verify implementation against plan
-/ai-factory.verify --strict # Strict mode — zero tolerance for gaps
-```
-
-Optional step after `/ai-factory.implement`. Goes through every task in the plan and verifies the code actually implements it. Checks build, tests, lint, looks for leftover TODOs, undocumented env vars, and plan-vs-code drift. Offers to fix any gaps found. At the end, suggests running `/ai-factory.security-checklist` and `/ai-factory.review`. Use `--strict` before merging to main.
-
-### `/ai-factory.fix [bug description]` — fix and learn
+### `/flz.verify [--strict]` — check completeness
 
 ```
-/ai-factory.fix TypeError: Cannot read property 'name' of undefined
+/flz.verify          # Verify implementation against plan
+/flz.verify --strict # Strict mode — zero tolerance for gaps
+```
+
+Optional step after `/flz.implement`. Goes through every task in the plan and verifies the code actually implements it. Checks build, tests, lint, looks for leftover TODOs, undocumented env vars, and plan-vs-code drift. Offers to fix any gaps found. At the end, suggests running `/flz.security-checklist` and `/flz.review`. Use `--strict` before merging to main.
+
+### `/flz.fix [bug description]` — fix and learn
+
+```
+/flz.fix TypeError: Cannot read property 'name' of undefined
 ```
 
 Two modes — choose when you invoke:
 - **Fix now** — investigates and fixes immediately with logging
-- **Plan first** — creates `.ai-factory/FIX_PLAN.md` with analysis and fix steps, then stops for review
+- **Plan first** — creates `.flz/FIX_PLAN.md` with analysis and fix steps, then stops for review
 
 When a plan exists, run without arguments to execute:
 ```
-/ai-factory.fix    # reads FIX_PLAN.md → applies fix → deletes plan
+/flz.fix    # reads FIX_PLAN.md → applies fix → deletes plan
 ```
 
-Every fix creates a **self-improvement patch** in `.ai-factory/patches/`. Every patch makes future `/ai-factory.implement` and `/ai-factory.fix` smarter.
+Every fix creates a **self-improvement patch** in `.flz/patches/`. Every patch makes future `/flz.implement` and `/flz.fix` smarter.
 
-### `/ai-factory.evolve` — improve skills from experience
+### `/flz.evolve` — improve skills from experience
 
 ```
-/ai-factory.evolve          # Evolve all skills
-/ai-factory.evolve fix      # Evolve only the fix skill
+/flz.evolve          # Evolve all skills
+/flz.evolve fix      # Evolve only the fix skill
 ```
 
 Reads all accumulated patches, analyzes project patterns, and proposes targeted skill improvements. Closes the learning loop: **fix → patch → evolve → better skills → fewer bugs**.
 
 ---
 
-For full details on all skills including utility commands (`/ai-factory.docs`, `/ai-factory.dockerize`, `/ai-factory.build-automation`, `/ai-factory.ci`, `/ai-factory.commit`, `/ai-factory.verify`, `/ai-factory.skill-generator`, `/ai-factory.security-checklist`), see [Core Skills](skills.md).
+For full details on all skills including utility commands (`/flz.docs`, `/flz.dockerize`, `/flz.build-automation`, `/flz.ci`, `/flz.commit`, `/flz.verify`, `/flz.skill-generator`, `/flz.security-checklist`), see [Core Skills](skills.md).
 
 ## Why Spec-Driven?
 

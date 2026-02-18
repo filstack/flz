@@ -1,5 +1,5 @@
 ---
-name: ai-factory.implement
+name: flz.implement
 description: Execute implementation tasks from the current plan. Works through tasks sequentially, marks completion, and preserves progress for continuation across sessions. Use when user says "implement", "start coding", "execute plan", or "continue implementation".
 argument-hint: '[task-id or "status"]'
 allowed-tools: Read Write Edit Glob Grep Bash TaskList TaskGet TaskUpdate AskUserQuestion Questions
@@ -18,14 +18,14 @@ Execute tasks from the plan, track progress, and enable session continuation.
 
 ```
 1. Check for uncommitted changes (git status)
-2. Check for plan files (.ai-factory/PLAN.md or branch-named)
+2. Check for plan files (.flz/PLAN.md or branch-named)
 3. Check current branch
 ```
 
 **If uncommitted changes exist:**
 ```
 You have uncommitted changes. Commit them first?
-- [ ] Yes, commit now (/ai-factory.commit)
+- [ ] Yes, commit now (/flz.commit)
 - [ ] No, stash and continue
 - [ ] Cancel
 ```
@@ -45,21 +45,21 @@ What would you like to do?
 ```
 
 Based on choice:
-- New feature from current → `/ai-factory.feature <description>`
-- Return to main → `git checkout main && git pull` → `/ai-factory.feature <description>`
-- Quick task → `/ai-factory.task <description>`
+- New feature from current → `/flz.feature <description>`
+- Return to main → `git checkout main && git pull` → `/flz.feature <description>`
+- Quick task → `/flz.task <description>`
 
 **If plan file exists → continue to Step 0.1**
 
 ### Step 0.1: Load Project Context & Past Experience
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database, ORM)
 - Project architecture and conventions
 - Non-functional requirements
 
-**Read all patches from `.ai-factory/patches/`** if the directory exists:
-- Use `Glob` to find all `*.md` files in `.ai-factory/patches/`
+**Read all patches from `.flz/patches/`** if the directory exists:
+- Use `Glob` to find all `*.md` files in `.flz/patches/`
 - Read each patch to learn from past fixes and mistakes
 - Apply lessons learned: avoid patterns that caused bugs, use patterns that prevented them
 - Pay attention to **Root Cause** and **Prevention** sections — they tell you what NOT to do
@@ -75,15 +75,15 @@ Based on choice:
 **Check for plan files in this order:**
 
 ```
-1. .ai-factory/PLAN.md exists? → Use it (direct /ai-factory.task call)
-2. No .ai-factory/PLAN.md → Check current git branch:
+1. .flz/PLAN.md exists? → Use it (direct /flz.task call)
+2. No .flz/PLAN.md → Check current git branch:
    git branch --show-current
-   → Look for .ai-factory/features/<branch-name>.md (e.g., .ai-factory/features/feature-user-auth.md)
+   → Look for .flz/features/<branch-name>.md (e.g., .flz/features/feature-user-auth.md)
 ```
 
 **Priority:**
-1. `.ai-factory/PLAN.md` - always takes priority (from direct `/ai-factory.task`)
-2. Branch-named file - if no .ai-factory/PLAN.md (from `/ai-factory.feature`)
+1. `.flz/PLAN.md` - always takes priority (from direct `/flz.task`)
+2. Branch-named file - if no .flz/PLAN.md (from `/flz.feature`)
 
 **Read the plan file** to understand:
 - Context and settings (testing, logging preferences)
@@ -161,7 +161,7 @@ TaskUpdate(taskId, status: "completed")
 - Even if deletion will be offered later
 - Plan file is the source of truth for progress
 
-**3.7: Update .ai-factory/DESCRIPTION.md if needed**
+**3.7: Update .flz/DESCRIPTION.md if needed**
 
 If during implementation:
 - New dependency/library was added
@@ -169,14 +169,14 @@ If during implementation:
 - New integration added (e.g., Stripe, SendGrid)
 - Architecture decision was made
 
-→ Update `.ai-factory/DESCRIPTION.md` to reflect the change:
+→ Update `.flz/DESCRIPTION.md` to reflect the change:
 
 ```markdown
 ## Tech Stack
 - **Cache:** Redis (added for session storage)
 ```
 
-This keeps .ai-factory/DESCRIPTION.md as the source of truth.
+This keeps .flz/DESCRIPTION.md as the source of truth.
 
 **3.8: Check for commit checkpoint**
 
@@ -187,7 +187,7 @@ If the plan has commit checkpoints and current task is at a checkpoint:
 This is a commit checkpoint. Ready to commit?
 Suggested message: "feat: add base models and types"
 
-- [ ] Yes, commit now (/ai-factory.commit)
+- [ ] Yes, commit now (/flz.commit)
 - [ ] No, continue to next task
 - [ ] Skip all commit checkpoints
 ```
@@ -206,12 +206,12 @@ Completed: 4/8 tasks
 Next task: #5 - Add pagination support
 
 To resume later, run:
-/ai-factory.implement
+/flz.implement
 ```
 
 **To resume (next session):**
 ```
-/ai-factory.implement
+/flz.implement
 ```
 → Automatically finds next incomplete task
 
@@ -225,7 +225,7 @@ When all tasks are done:
 All 8 tasks completed.
 
 Branch: feature/product-search
-Plan file: .ai-factory/features/feature-product-search.md
+Plan file: .flz/features/feature-product-search.md
 Files modified:
 - src/services/search.ts (created)
 - src/api/products/search.ts (created)
@@ -233,8 +233,8 @@ Files modified:
 
 What's next?
 
-1. 🔍 /ai-factory.verify — Verify nothing was missed (recommended)
-2. 💾 /ai-factory.commit — Commit the changes directly
+1. 🔍 /flz.verify — Verify nothing was missed (recommended)
+2. 💾 /flz.commit — Commit the changes directly
 ```
 
 ### Context Cleanup
@@ -256,16 +256,16 @@ Options:
 AskUserQuestion: All tasks complete. Run verification?
 
 Options:
-1. Verify first — Run /ai-factory.verify to check completeness (recommended)
-2. Skip to commit — Go straight to /ai-factory.commit
+1. Verify first — Run /flz.verify to check completeness (recommended)
+2. Skip to commit — Go straight to /flz.commit
 ```
 
-If user chooses "Verify first" → suggest invoking `/ai-factory.verify`.
-If user chooses "Skip to commit" → suggest invoking `/ai-factory.commit`.
+If user chooses "Verify first" → suggest invoking `/flz.verify`.
+If user chooses "Skip to commit" → suggest invoking `/flz.commit`.
 
 **Check if documentation needs updating:**
 
-Read the plan file settings. If documentation preference is set to "yes" (from `/ai-factory.feature` questions), run `/ai-factory.docs` to update documentation.
+Read the plan file settings. If documentation preference is set to "yes" (from `/flz.feature` questions), run `/flz.docs` to update documentation.
 
 If documentation preference is "no" or not set — skip this step silently.
 
@@ -273,18 +273,18 @@ If documentation preference is "yes":
 ```
 📝 Updating project documentation...
 ```
-→ Invoke `/ai-factory.docs` to analyze changes and update docs.
+→ Invoke `/flz.docs` to analyze changes and update docs.
 
 **Handle plan file after completion:**
 
-- **If `.ai-factory/PLAN.md`** (direct /ai-factory.task, not from /ai-factory.feature):
+- **If `.flz/PLAN.md`** (direct /flz.task, not from /flz.feature):
   ```
-  Would you like to delete .ai-factory/PLAN.md? (It's no longer needed)
+  Would you like to delete .flz/PLAN.md? (It's no longer needed)
   - [ ] Yes, delete it
   - [ ] No, keep it
   ```
 
-- **If branch-named file** (e.g., `.ai-factory/features/feature-user-auth.md`):
+- **If branch-named file** (e.g., `.flz/features/feature-user-auth.md`):
   - Keep it - documents what was done
   - User can delete before merging if desired
 
@@ -312,7 +312,7 @@ Would you like to merge this branch into main and clean up?
 
 If user chooses **"Yes, merge and clean up"**:
 
-1. **Ensure everything is committed** — check `git status`. If uncommitted changes exist, suggest `/ai-factory.commit` first and wait.
+1. **Ensure everything is committed** — check `git status`. If uncommitted changes exist, suggest `/flz.commit` first and wait.
 
 2. **Get main repo path:**
    ```bash
@@ -362,7 +362,7 @@ If user chooses **"No, I'll handle it manually"**, show a reminder:
 To merge and clean up later:
   cd <main-repo-path>
   git merge <branch>
-  /ai-factory.feature --cleanup <branch>
+  /flz.feature --cleanup <branch>
 ```
 
 **IMPORTANT: NO summary reports, NO analysis documents, NO wrap-up tasks.**
@@ -371,19 +371,19 @@ To merge and clean up later:
 
 ### Start/Resume Implementation
 ```
-/ai-factory.implement
+/flz.implement
 ```
 Continues from next incomplete task.
 
 ### Start from Specific Task
 ```
-/ai-factory.implement 5
+/flz.implement 5
 ```
 Starts from task #5 (useful for skipping or re-doing).
 
 ### Check Status Only
 ```
-/ai-factory.implement status
+/flz.implement status
 ```
 Shows progress without executing.
 
@@ -446,7 +446,7 @@ Tasks are persisted in the conversation/project state.
 
 **Starting new session:**
 ```
-User: /ai-factory.implement
+User: /flz.implement
 
 Claude: Resuming implementation...
 
@@ -460,23 +460,23 @@ Continuing from Task #4: Implement JWT generation
 
 ```
 Session 1:
-  /ai-factory.feature Add user authentication
+  /flz.feature Add user authentication
   → Creates branch: feature/user-authentication
   → Asks about tests (No), logging (Verbose)
-  → /ai-factory.task creates 6 tasks
-  → Saves plan to: .ai-factory/features/feature-user-authentication.md
-  → /ai-factory.implement starts
+  → /flz.task creates 6 tasks
+  → Saves plan to: .flz/features/feature-user-authentication.md
+  → /flz.implement starts
   → Completes tasks #1, #2, #3
   → User ends session
 
 Session 2:
-  /ai-factory.implement
+  /flz.implement
   → Detects branch: feature/user-authentication
-  → Reads plan: .ai-factory/features/feature-user-authentication.md
+  → Reads plan: .flz/features/feature-user-authentication.md
   → Loads state: 3/6 complete
   → Continues from task #4
   → Completes tasks #4, #5, #6
-  → All done, suggests /ai-factory.commit
+  → All done, suggests /flz.commit
 ```
 
 ## Critical Rules

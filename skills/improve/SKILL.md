@@ -1,6 +1,6 @@
 ---
-name: ai-factory.improve
-description: Refine and enhance an existing implementation plan with a second iteration. Re-analyzes the codebase, checks for gaps, missing tasks, wrong dependencies, and improves the plan quality. Use after /ai-factory.task or /ai-factory.feature to polish the plan before implementation.
+name: flz.improve
+description: Refine and enhance an existing implementation plan with a second iteration. Re-analyzes the codebase, checks for gaps, missing tasks, wrong dependencies, and improves the plan quality. Use after /flz.task or /flz.feature to polish the plan before implementation.
 argument-hint: "[improvement prompt or empty for auto-review]"
 allowed-tools: Read Write Edit Glob Grep Bash(git *) TaskCreate TaskUpdate TaskList TaskGet AskUserQuestion Questions
 disable-model-invocation: false
@@ -27,12 +27,12 @@ enhanced plan with better tasks, correct dependencies, more detail
 **Locate the active plan file using this priority:**
 
 ```
-1. .ai-factory/PLAN.md exists? → Use it (from direct /ai-factory.task)
-2. No .ai-factory/PLAN.md → Check current git branch:
+1. .flz/PLAN.md exists? → Use it (from direct /flz.task)
+2. No .flz/PLAN.md → Check current git branch:
    git branch --show-current
    → Convert branch name to filename: replace "/" with "-", add ".md"
-   → Look for .ai-factory/features/<branch-name>.md
-   Example: feature/user-auth → .ai-factory/features/feature-user-auth.md
+   → Look for .flz/features/<branch-name>.md
+   Example: feature/user-auth → .flz/features/feature-user-auth.md
 ```
 
 **If NO plan file found at either location:**
@@ -41,8 +41,8 @@ enhanced plan with better tasks, correct dependencies, more detail
 No active plan found.
 
 To create a plan first, use:
-- /ai-factory.feature <description>  — for a new feature (creates branch + plan)
-- /ai-factory.task <description>     — for a quick task plan
+- /flz.feature <description>  — for a new feature (creates branch + plan)
+- /flz.task <description>     — for a quick task plan
 ```
 
 → **STOP here.** Do not proceed without a plan file.
@@ -62,7 +62,7 @@ Read the found plan file completely. Understand:
 
 **1.2: Read project context**
 
-Read `.ai-factory/DESCRIPTION.md` if it exists:
+Read `.flz/DESCRIPTION.md` if it exists:
 - Tech stack
 - Architecture
 - Conventions
@@ -71,7 +71,7 @@ Read `.ai-factory/DESCRIPTION.md` if it exists:
 **1.3: Read patches (past mistakes)**
 
 ```
-Glob: .ai-factory/patches/*.md
+Glob: .flz/patches/*.md
 ```
 
 If patches exist, read them to understand:
@@ -89,7 +89,7 @@ Understand what's already been created, what's in progress, what's completed.
 
 ### Step 2: Deep Codebase Analysis
 
-Now do a **deeper** codebase exploration than what `/ai-factory.task` did initially:
+Now do a **deeper** codebase exploration than what `/flz.task` did initially:
 
 **2.1: Trace through existing code paths**
 
@@ -220,7 +220,7 @@ Plan: [plan file path]
 Tasks: N
 
 Ready to implement:
-/ai-factory.implement
+/flz.implement
 ```
 
 ### Step 5: Apply Approved Improvements
@@ -283,7 +283,7 @@ Updated plan: [plan file path]
 Total tasks: N
 
 Ready to implement:
-/ai-factory.implement
+/flz.implement
 ```
 
 ### Context Cleanup
@@ -315,9 +315,9 @@ Options:
 ### Example 1: Auto-review (no arguments)
 
 ```
-User: /ai-factory.improve
+User: /flz.improve
 
-→ Found plan: .ai-factory/features/feature-user-auth.md
+→ Found plan: .flz/features/feature-user-auth.md
 → 6 tasks in plan
 → Deep codebase analysis...
 → Found: project uses middleware pattern for auth, plan misses middleware task
@@ -335,9 +335,9 @@ Apply? → Yes → Changes applied
 ### Example 2: With user prompt
 
 ```
-User: /ai-factory.improve добавь обработку ошибок и валидацию входных данных
+User: /flz.improve добавь обработку ошибок и валидацию входных данных
 
-→ Found plan: .ai-factory/PLAN.md
+→ Found plan: .flz/PLAN.md
 → 4 tasks in plan
 → User wants: error handling + input validation
 → Analyzing each task for missing error handling...
@@ -355,27 +355,27 @@ Apply? → Yes → Changes applied
 ### Example 3: No plan found
 
 ```
-User: /ai-factory.improve
+User: /flz.improve
 
-→ No .ai-factory/PLAN.md found
+→ No .flz/PLAN.md found
 → Branch: main (no feature branch)
 → No plan file found
 
 "No active plan found. Create one first:
-- /ai-factory.feature <description>
-- /ai-factory.task <description>"
+- /flz.feature <description>
+- /flz.task <description>"
 ```
 
 ### Example 4: Plan already looks good
 
 ```
-User: /ai-factory.improve
+User: /flz.improve
 
-→ Found plan: .ai-factory/features/feature-product-search.md
+→ Found plan: .flz/features/feature-product-search.md
 → 5 tasks in plan
 → Deep analysis... all tasks well-defined, dependencies correct
 → No significant improvements found
 
 "Plan looks solid! Ready to implement:
-/ai-factory.implement"
+/flz.implement"
 ```

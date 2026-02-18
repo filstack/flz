@@ -1,5 +1,5 @@
 ---
-name: ai-factory.fix
+name: flz.fix
 description: Fix a specific bug or problem in the codebase. Supports two modes - immediate fix or plan-first. Without arguments executes existing FIX_PLAN.md. Always suggests test coverage and adds logging. Use when user says "fix bug", "debug this", "something is broken", or pastes an error message.
 argument-hint: <bug description or error message>
 allowed-tools: Read Write Edit Glob Grep Bash AskUserQuestion Questions
@@ -14,21 +14,21 @@ Fix a specific bug or problem in the codebase. Supports two modes: immediate fix
 
 ### Step 0: Check for Existing Fix Plan
 
-**BEFORE anything else**, check if `.ai-factory/FIX_PLAN.md` exists.
+**BEFORE anything else**, check if `.flz/FIX_PLAN.md` exists.
 
 **If the file EXISTS:**
-- Read `.ai-factory/FIX_PLAN.md`
+- Read `.flz/FIX_PLAN.md`
 - Inform the user: "Found existing fix plan. Executing fix based on the plan."
 - **Skip Steps 0.1 through 1** — go directly to **Step 2: Investigate the Codebase**, using the plan as your guide
 - Follow each step of the plan sequentially
-- After the fix is fully applied and verified, **delete** `.ai-factory/FIX_PLAN.md`:
+- After the fix is fully applied and verified, **delete** `.flz/FIX_PLAN.md`:
   ```bash
-  rm .ai-factory/FIX_PLAN.md
+  rm .flz/FIX_PLAN.md
   ```
 - Continue to Step 4 (Verify), Step 5 (Test suggestion), Step 6 (Patch)
 
 **If the file DOES NOT exist AND `$ARGUMENTS` is empty:**
-- Tell the user: "No fix plan found and no problem description provided. Please either provide a bug description (`/ai-factory.fix <description>`) or create a fix plan first."
+- Tell the user: "No fix plan found and no problem description provided. Please either provide a bug description (`/flz.fix <description>`) or create a fix plan first."
 - **STOP.**
 
 **If the file DOES NOT exist AND `$ARGUMENTS` is provided:**
@@ -36,13 +36,13 @@ Fix a specific bug or problem in the codebase. Supports two modes: immediate fix
 
 ### Step 0.1: Load Project Context & Past Experience
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database)
 - Project architecture
 - Coding conventions
 
-**Read all patches from `.ai-factory/patches/`** if the directory exists:
-- Use `Glob` to find all `*.md` files in `.ai-factory/patches/`
+**Read all patches from `.flz/patches/`** if the directory exists:
+- Use `Glob` to find all `*.md` files in `.flz/patches/`
 - Read each patch file to learn from past fixes
 - Pay attention to recurring patterns, root causes, and solutions
 - If the current problem resembles a past patch — apply the same approach or avoid the same mistakes
@@ -88,7 +88,7 @@ Investigate the codebase enough to understand the problem and create a plan.
 3. Trace the data flow
 4. Identify the root cause (or most likely candidates)
 
-Then create `.ai-factory/FIX_PLAN.md` with this structure:
+Then create `.flz/FIX_PLAN.md` with this structure:
 
 ```markdown
 # Fix Plan: [Brief title]
@@ -133,11 +133,11 @@ Step-by-step plan for implementing the fix:
 ```
 ## Fix Plan Created ✅
 
-Plan saved to `.ai-factory/FIX_PLAN.md`.
+Plan saved to `.flz/FIX_PLAN.md`.
 
 Review the plan and when you're ready to execute, run:
 
-/ai-factory.fix
+/flz.fix
 ```
 
 **STOP here. Do NOT apply the fix.**
@@ -256,7 +256,7 @@ function fixedFunction(input) {
 
 ### Example 1: Null Reference Error
 
-**User:** `/ai-factory.fix TypeError: Cannot read property 'name' of undefined in UserProfile`
+**User:** `/flz.fix TypeError: Cannot read property 'name' of undefined in UserProfile`
 
 **Actions:**
 1. Search for UserProfile component/function
@@ -266,7 +266,7 @@ function fixedFunction(input) {
 
 ### Example 2: API Returns Wrong Data
 
-**User:** `/ai-factory.fix /api/orders returns empty array for authenticated users`
+**User:** `/flz.fix /api/orders returns empty array for authenticated users`
 
 **Actions:**
 1. Find orders API endpoint
@@ -277,7 +277,7 @@ function fixedFunction(input) {
 
 ### Example 3: Form Validation Not Working
 
-**User:** `/ai-factory.fix email validation accepts invalid emails`
+**User:** `/flz.fix email validation accepts invalid emails`
 
 **Actions:**
 1. Find email validation logic
@@ -329,7 +329,7 @@ To add the suggested test:
 
 1. Create directory if it doesn't exist:
    ```bash
-   mkdir -p .ai-factory/patches
+   mkdir -p .flz/patches
    ```
 
 2. Create a patch file with the current timestamp as filename.

@@ -1,5 +1,5 @@
 ---
-name: ai-factory.best-practices
+name: flz.best-practices
 description: Code quality guidelines and best practices for writing clean, maintainable code. Covers naming, structure, error handling, testing, and code review standards. Use when writing code, reviewing, refactoring, or asking "how should I name this", "best practice for", "clean code".
 argument-hint: "[naming|structure|errors|testing|review]"
 allowed-tools: Read Glob Grep
@@ -11,12 +11,12 @@ Universal code quality guidelines applicable to any language or framework.
 
 ## Quick Reference
 
-- `/ai-factory.best-practices` — Full overview
-- `/ai-factory.best-practices naming` — Naming conventions
-- `/ai-factory.best-practices structure` — Code organization
-- `/ai-factory.best-practices errors` — Error handling
-- `/ai-factory.best-practices testing` — Testing practices
-- `/ai-factory.best-practices review` — Code review checklist
+- `/flz.best-practices` — Full overview
+- `/flz.best-practices naming` — Naming conventions
+- `/flz.best-practices structure` — Code organization
+- `/flz.best-practices errors` — Error handling
+- `/flz.best-practices testing` — Testing practices
+- `/flz.best-practices review` — Code review checklist
 
 ---
 
@@ -222,7 +222,7 @@ describe('calculateDiscount', () => {
 ### Reviewer Checklist
 - [ ] **Correctness**: Does it do what it claims?
 - [ ] **Edge cases**: What could go wrong?
-- [ ] **Security**: Any vulnerabilities? (see `/ai-factory.security-checklist`)
+- [ ] **Security**: Any vulnerabilities? (see `/flz.security-checklist`)
 - [ ] **Performance**: Any obvious bottlenecks?
 - [ ] **Readability**: Can I understand it in 5 minutes?
 - [ ] **Tests**: Are critical paths covered?

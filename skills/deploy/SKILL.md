@@ -1,5 +1,5 @@
 ---
-name: ai-factory.deploy
+name: flz.deploy
 description: Prepare and execute deployments with pre-flight checks, release notes generation, and CI/CD integration. NEVER auto-deploy. Use when user explicitly says "deploy", "release", or "go live".
 argument-hint: "[staging|production]"
 allowed-tools: Bash(git *) Bash(npm *) Bash(docker *) Bash(gh *)
@@ -39,14 +39,14 @@ Run deployment readiness checks:
 
 ### With Environment Argument
 
-#### `/ai-factory.deploy staging`
+#### `/flz.deploy staging`
 
 1. Run pre-flight checks
 2. Generate changelog since last staging deploy
 3. Provide deployment commands for staging environment
 4. Tag release as staging-{date}
 
-#### `/ai-factory.deploy production`
+#### `/flz.deploy production`
 
 1. Run ALL pre-flight checks (more strict)
 2. Require clean git status
@@ -128,11 +128,11 @@ Detect and provide commands for:
 
 ## Examples
 
-**User:** `/ai-factory.deploy`
+**User:** `/flz.deploy`
 Run all pre-flight checks, report readiness.
 
-**User:** `/ai-factory.deploy staging`
+**User:** `/flz.deploy staging`
 Prepare staging deployment with changelog.
 
-**User:** `/ai-factory.deploy production`
+**User:** `/flz.deploy production`
 Full production deployment workflow with release notes.

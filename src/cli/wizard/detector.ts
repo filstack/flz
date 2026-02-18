@@ -236,7 +236,7 @@ async function detectPythonStack(projectDir: string): Promise<DetectedStack> {
 
 export function getRecommendedSkills(stack: DetectedStack | null): string[] {
   const baseSkills = [
-    'ai-factory',
+    'flz',
     'skill-generator',
     'feature',
     'task',

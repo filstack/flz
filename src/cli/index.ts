@@ -6,13 +6,13 @@ import { getCurrentVersion } from '../core/config.js';
 const program = new Command();
 
 program
-  .name('ai-factory')
+  .name('flz')
   .description('CLI tool for automating AI agent context setup')
   .version(getCurrentVersion());
 
 program
   .command('init')
-  .description('Initialize ai-factory in current project')
+  .description('Initialize flz in current project')
   .action(initCommand);
 
 program

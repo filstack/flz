@@ -1,6 +1,6 @@
 # Learn Mode — Self-Learning Skill Generation
 
-Learn Mode activates automatically when the user passes one or more URLs as arguments to `/ai-factory.skill-generator`. The system studies external sources and generates a skill based on the acquired knowledge.
+Learn Mode activates automatically when the user passes one or more URLs as arguments to `/flz.skill-generator`. The system studies external sources and generates a skill based on the acquired knowledge.
 
 ## URL Detection
 
@@ -8,10 +8,10 @@ Scan `$ARGUMENTS` for patterns matching `https?://[^\s]+`. Any argument containi
 
 **Examples of invocation:**
 ```
-/ai-factory.skill-generator https://docs.example.com/api-reference
-/ai-factory.skill-generator https://react.dev/learn https://react.dev/reference
-/ai-factory.skill-generator my-skill-name https://some-docs.com/guide
-/ai-factory.skill-generator https://github.com/owner/repo https://blog.example.com/best-practices
+/flz.skill-generator https://docs.example.com/api-reference
+/flz.skill-generator https://react.dev/learn https://react.dev/reference
+/flz.skill-generator my-skill-name https://some-docs.com/guide
+/flz.skill-generator https://github.com/owner/repo https://blog.example.com/best-practices
 ```
 
 When a non-URL argument is also present (like `my-skill-name`), use it as the skill name hint.
@@ -169,24 +169,24 @@ When multiple URLs are provided:
 
 ### Example 1: Single Documentation URL
 ```
-/ai-factory.skill-generator https://tailwindcss.com/docs
+/flz.skill-generator https://tailwindcss.com/docs
 ```
 Result: A skill that helps write Tailwind CSS classes with a reference guide of utilities, responsive patterns, and best practices.
 
 ### Example 2: Multiple Related URLs
 ```
-/ai-factory.skill-generator https://react.dev/learn/thinking-in-react https://react.dev/reference/react/hooks
+/flz.skill-generator https://react.dev/learn/thinking-in-react https://react.dev/reference/react/hooks
 ```
 Result: A React development skill with component design patterns and hooks reference.
 
 ### Example 3: URL + Name
 ```
-/ai-factory.skill-generator fastapi-helper https://fastapi.tiangolo.com/tutorial/
+/flz.skill-generator fastapi-helper https://fastapi.tiangolo.com/tutorial/
 ```
 Result: A skill named `fastapi-helper` with FastAPI patterns, endpoint templates, and validation examples.
 
 ### Example 4: Mixed Sources
 ```
-/ai-factory.skill-generator https://docs.docker.com/compose/ https://blog.example.com/docker-compose-tips
+/flz.skill-generator https://docs.docker.com/compose/ https://blog.example.com/docker-compose-tips
 ```
 Result: A Docker Compose skill combining official reference with practical tips from the blog.

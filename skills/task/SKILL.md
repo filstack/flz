@@ -1,5 +1,5 @@
 ---
-name: ai-factory.task
+name: flz.task
 description: Create a step-by-step implementation plan for a feature or task. Breaks down work into actionable tasks tracked via the task system. Use when user says "plan", "create tasks", "break down", or "make a plan for".
 argument-hint: <task description>
 allowed-tools: Read Write Glob Grep Bash(git *) TaskCreate TaskUpdate TaskList AskUserQuestion Questions
@@ -14,7 +14,7 @@ Create a detailed, actionable implementation plan broken into trackable tasks.
 
 ### Step 0: Load Project Context
 
-**FIRST:** Read `.ai-factory/DESCRIPTION.md` if it exists to understand:
+**FIRST:** Read `.flz/DESCRIPTION.md` if it exists to understand:
 - Tech stack (language, framework, database, ORM)
 - Project architecture
 - Coding conventions
@@ -34,11 +34,11 @@ git rev-parse --is-inside-work-tree 2>/dev/null || git init
 
 **Determine plan file name:**
 
-1. **If called from `/ai-factory.feature`** - use the plan file name passed (e.g., `.ai-factory/features/feature-user-auth.md`)
+1. **If called from `/flz.feature`** - use the plan file name passed (e.g., `.flz/features/feature-user-auth.md`)
 
-2. **If called directly (`/ai-factory.task`)** - ALWAYS use `.ai-factory/PLAN.md`
+2. **If called directly (`/flz.task`)** - ALWAYS use `.flz/PLAN.md`
    - Do NOT check current branch
-   - Direct task planning = temporary plan in `.ai-factory/PLAN.md`
+   - Direct task planning = temporary plan in `.flz/PLAN.md`
 
 ### Step 1: Analyze Requirements
 
@@ -60,7 +60,7 @@ I need a few clarifications before creating the plan:
 
 ### Step 3: Check Testing Preference
 
-If not already specified (from `/ai-factory.feature`), ask:
+If not already specified (from `/flz.feature`), ask:
 
 ```
 Should I include test tasks in the plan?
@@ -157,10 +157,10 @@ Created: [date]
 
 **Before saving, ensure directory exists:**
 ```bash
-mkdir -p .ai-factory/features  # only when saving to features/
+mkdir -p .flz/features  # only when saving to features/
 ```
 
-Save to: `.ai-factory/PLAN.md` (direct call) or `.ai-factory/features/<branch-name>.md` (from /ai-factory.feature)
+Save to: `.flz/PLAN.md` (direct call) or `.flz/features/<branch-name>.md` (from /flz.feature)
 
 ### Step 8: Confirm Plan
 
@@ -169,7 +169,7 @@ Present to user:
 ```
 Plan saved to: [filename].md
 
-Ready to start? Use `/ai-factory.implement` to begin execution.
+Ready to start? Use `/flz.implement` to begin execution.
 ```
 
 ## Task Creation Format
@@ -192,7 +192,7 @@ TaskCreate:
 
 ### Example 1: API Feature (NO tests)
 
-**Input:** `/ai-factory.task Add product search API`
+**Input:** `/flz.task Add product search API`
 **Testing:** No
 
 **Plan:**
@@ -206,7 +206,7 @@ TaskCreate:
 
 ### Example 2: Full Feature (WITH tests)
 
-**Input:** `/ai-factory.task Add product search API`
+**Input:** `/flz.task Add product search API`
 **Testing:** Yes
 
 **Plan:**
@@ -227,7 +227,7 @@ TaskCreate:
 5. **Dependencies matter** - Order tasks so they can be done sequentially
 6. **Include file paths** - Help implementer know where to work
 7. **Commit checkpoints for large plans** - 5+ tasks need commit plan with checkpoints every 3-5 tasks
-8. **.ai-factory/PLAN.md for direct calls** - Always use `.ai-factory/PLAN.md` when called directly, branch-named files only from `/ai-factory.feature`
+8. **.flz/PLAN.md for direct calls** - Always use `.flz/PLAN.md` when called directly, branch-named files only from `/flz.feature`
 
 ## CRITICAL: Logging in Task Descriptions
 
@@ -281,7 +281,7 @@ Plan created with [N] tasks.
 Plan file: [filename].md
 
 To start implementation, run:
-/ai-factory.implement
+/flz.implement
 
 To view tasks:
 /tasks (or use TaskList)
@@ -302,12 +302,12 @@ Options:
 
 ## Plan File Handling
 
-**`.ai-factory/PLAN.md`** (direct `/ai-factory.task` call):
+**`.flz/PLAN.md`** (direct `/flz.task` call):
 - Temporary plan for quick tasks
-- After completion, `/ai-factory.implement` will ask to delete it
+- After completion, `/flz.implement` will ask to delete it
 - Not tied to any branch
 
-**Branch-named file** (from `/ai-factory.feature`):
+**Branch-named file** (from `/flz.feature`):
 - Permanent documentation of feature work
-- `/ai-factory.implement` will NOT suggest deletion
+- `/flz.implement` will NOT suggest deletion
 - User decides whether to keep or delete before merge

@@ -1,11 +1,11 @@
 ---
-name: ai-factory.ci
+name: flz.ci
 description: Generate CI/CD pipeline (GitHub Actions / GitLab CI) with linting, static analysis, tests, security. Use when user says "ci", "setup ci", "github actions", "gitlab ci", "pipeline".
 argument-hint: "[github|gitlab] [--enhance]"
 allowed-tools: Read Edit Glob Grep Write Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: ci
 ---
@@ -29,7 +29,7 @@ Analyze a project and generate production-grade CI/CD pipeline configuration for
 Read the project description if available:
 
 ```
-Read .ai-factory/DESCRIPTION.md
+Read .flz/DESCRIPTION.md
 ```
 
 Store project context for later steps. If absent, Step 2 detects everything.
@@ -810,8 +810,8 @@ GitHub Actions
 AskUserQuestion: CI pipeline is ready. What's next?
 
 Options:
-1. Build automation — Run /ai-factory.build-automation to add CI targets to Makefile/Taskfile
-2. Docker setup — Run /ai-factory.dockerize to containerize the project
+1. Build automation — Run /flz.build-automation to add CI targets to Makefile/Taskfile
+2. Docker setup — Run /flz.dockerize to containerize the project
 3. Both
 4. Done — Skip follow-ups
 ```

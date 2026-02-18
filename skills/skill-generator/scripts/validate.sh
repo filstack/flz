@@ -63,7 +63,7 @@ else
         error "Name exceeds 64 characters: ${#NAME} ('$NAME')"
     fi
 
-    # Dotted names (namespaces) like "ai-factory.feature" — valid but not portable across all agents
+    # Dotted names (namespaces) like "flz.feature" — valid but not portable across all agents
     if [[ "$NAME" == *.* ]]; then
         PARTS_VALID=true
         IFS='.' read -ra PARTS <<< "$NAME"

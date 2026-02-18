@@ -17,7 +17,7 @@ export interface AgentTransformer {
 }
 
 export const WORKFLOW_SKILLS = new Set([
-  'ai-factory',
+  'flz',
   'commit',
   'deploy',
   'feature',

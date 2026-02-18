@@ -1,5 +1,5 @@
 ---
-name: ai-factory.dockerize
+name: flz.dockerize
 description: >-
   Analyze project and generate Docker configuration: Dockerfile (multi-stage dev/prod),
   compose.yml, compose.override.yml (dev), compose.production.yml (hardened), and .dockerignore.
@@ -9,7 +9,7 @@ argument-hint: "[--audit]"
 allowed-tools: Read Edit Glob Grep Write Bash(git *) Bash(docker *) AskUserQuestion Questions WebSearch WebFetch
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: infrastructure
 ---
@@ -33,7 +33,7 @@ Analyze a project and generate a complete, production-grade Docker setup: multi-
 Read the project description if available:
 
 ```
-Read .ai-factory/DESCRIPTION.md
+Read .flz/DESCRIPTION.md
 ```
 
 Store project context for later steps. If absent, Step 2 detects everything.
@@ -169,7 +169,7 @@ Read dependency files to detect the framework:
 
 ### 2.3 Package Manager & Lock File
 
-Same detection as `/ai-factory.build-automation` Step 2.2.
+Same detection as `/flz.build-automation` Step 2.2.
 
 Store: `PACKAGE_MANAGER`, `LOCK_FILE`.
 
@@ -581,7 +581,7 @@ Options:
 1. Fix all — Apply all recommendations
 2. Fix critical only — Fix security issues, skip improvements
 3. Show details — Explain each issue before deciding
-4. Export report — Save audit report to .ai-factory/docker-audit.md
+4. Export report — Save audit report to .flz/docker-audit.md
 ```
 
 **If fixing:**
@@ -887,12 +887,12 @@ If `MODE = "audit"` and deploy scripts already exist:
 AskUserQuestion: Docker setup complete. What's next?
 
 Options:
-1. Build automation — Run /ai-factory.build-automation to add Docker targets to Makefile/Taskfile
-2. Update docs — Run /ai-factory.docs to document the Docker setup
+1. Build automation — Run /flz.build-automation to add Docker targets to Makefile/Taskfile
+2. Update docs — Run /flz.docs to document the Docker setup
 3. Both — Build automation first, then docs
 4. Done — Skip follow-ups
 ```
 
-**If build automation** → suggest invoking `/ai-factory.build-automation`
-**If docs** → suggest invoking `/ai-factory.docs`
+**If build automation** → suggest invoking `/flz.build-automation`
+**If docs** → suggest invoking `/flz.docs`
 **If both** → suggest build-automation first, then docs

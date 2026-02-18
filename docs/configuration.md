@@ -2,14 +2,14 @@
 
 # Configuration
 
-## `.ai-factory.json`
+## `.flz.json`
 
 ```json
 {
   "version": "1.0.0",
   "agent": "claude",
   "skillsDir": ".claude/skills",
-  "installedSkills": ["ai-factory", "feature", "task", "improve", "implement", "commit", "build-automation"],
+  "installedSkills": ["flz", "feature", "task", "improve", "implement", "commit", "build-automation"],
   "mcp": {
     "github": true,
     "postgres": false,
@@ -22,7 +22,7 @@ The `agent` field can be any supported agent ID: `claude`, `cursor`, `windsurf`,
 
 ## MCP Configuration
 
-AI Factory can configure these MCP servers:
+FLZ can configure these MCP servers:
 
 | MCP Server | Use Case | Env Variable |
 |------------|----------|--------------|
@@ -40,7 +40,7 @@ After initialization (example for Claude Code — other agents use their own dir
 your-project/
 ├── .claude/                   # Agent config dir (varies: .cursor/, .codex/, .ai/, etc.)
 │   ├── skills/
-│   │   ├── ai-factory/
+│   │   ├── flz/
 │   │   ├── feature/
 │   │   ├── task/
 │   │   ├── improve/
@@ -53,17 +53,17 @@ your-project/
 │   │   ├── review/
 │   │   └── skill-generator/
 │   └── settings.local.json    # MCP config (Claude/Cursor, gitignored)
-├── .ai-factory/               # AI Factory working directory
+├── .flz/               # FLZ working directory
 │   ├── DESCRIPTION.md         # Project specification
-│   ├── PLAN.md                # Current plan (from /ai-factory.task)
+│   ├── PLAN.md                # Current plan (from /flz.task)
 │   ├── SECURITY.md            # Ignored security items (from /security-checklist ignore)
-│   ├── features/              # Feature plans (from /ai-factory.feature)
+│   ├── features/              # Feature plans (from /flz.feature)
 │   │   └── feature-*.md
-│   ├── patches/               # Self-improvement patches (from /ai-factory.fix)
+│   ├── patches/               # Self-improvement patches (from /flz.fix)
 │   │   └── 2026-02-07-14.30.md
-│   └── evolutions/            # Evolution logs (from /ai-factory.evolve)
+│   └── evolutions/            # Evolution logs (from /flz.evolve)
 │       └── 2026-02-08-10.00.md
-└── .ai-factory.json           # AI Factory config
+└── .flz.json           # FLZ config
 ```
 
 ## Best Practices

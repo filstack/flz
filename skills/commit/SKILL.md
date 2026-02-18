@@ -1,5 +1,5 @@
 ---
-name: ai-factory.commit
+name: flz.commit
 description: Create conventional commit messages by analyzing staged changes. Generates semantic commit messages following the Conventional Commits specification. Use when user says "commit", "save changes", or "create commit".
 argument-hint: "[scope or context]"
 allowed-tools: Bash(git *)
@@ -84,7 +84,7 @@ When invoked:
 4. Ask for confirmation or modifications
 5. Execute `git commit` with the message
 
-If argument provided (e.g., `/ai-factory.commit auth`):
+If argument provided (e.g., `/flz.commit auth`):
 - Use it as the scope
 - Or as context for the commit message
 

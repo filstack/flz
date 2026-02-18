@@ -1,5 +1,5 @@
 ---
-name: ai-factory.security-checklist
+name: flz.security-checklist
 description: Security audit checklist based on OWASP Top 10 and best practices. Covers authentication, injection, XSS, CSRF, secrets management, and more. Use when reviewing security, before deploy, asking "is this secure", "security check", "vulnerability".
 argument-hint: "[auth|injection|xss|csrf|secrets|api|infra|prompt-injection|race-condition|ignore <item>]"
 allowed-tools: Read Glob Grep Write Edit Bash(npm audit) Bash(grep *)
@@ -11,41 +11,41 @@ Comprehensive security checklist based on OWASP Top 10 (2021) and industry best 
 
 ## Quick Reference
 
-- `/ai-factory.security-checklist` — Full audit checklist
-- `/ai-factory.security-checklist auth` — Authentication & sessions
-- `/ai-factory.security-checklist injection` — SQL/NoSQL/Command injection
-- `/ai-factory.security-checklist xss` — Cross-site scripting
-- `/ai-factory.security-checklist csrf` — Cross-site request forgery
-- `/ai-factory.security-checklist secrets` — Secrets & credentials
-- `/ai-factory.security-checklist api` — API security
-- `/ai-factory.security-checklist infra` — Infrastructure security
-- `/ai-factory.security-checklist prompt-injection` — LLM prompt injection
-- `/ai-factory.security-checklist race-condition` — Race conditions & TOCTOU
-- `/ai-factory.security-checklist ignore <item>` — Ignore a specific check item
+- `/flz.security-checklist` — Full audit checklist
+- `/flz.security-checklist auth` — Authentication & sessions
+- `/flz.security-checklist injection` — SQL/NoSQL/Command injection
+- `/flz.security-checklist xss` — Cross-site scripting
+- `/flz.security-checklist csrf` — Cross-site request forgery
+- `/flz.security-checklist secrets` — Secrets & credentials
+- `/flz.security-checklist api` — API security
+- `/flz.security-checklist infra` — Infrastructure security
+- `/flz.security-checklist prompt-injection` — LLM prompt injection
+- `/flz.security-checklist race-condition` — Race conditions & TOCTOU
+- `/flz.security-checklist ignore <item>` — Ignore a specific check item
 
 ## Ignored Items (SECURITY.md)
 
-Before running any audit, **always read** the file `.ai-factory/SECURITY.md` in the project root. If it exists, it contains a list of security checks the team has decided to ignore.
+Before running any audit, **always read** the file `.flz/SECURITY.md` in the project root. If it exists, it contains a list of security checks the team has decided to ignore.
 
 ### How ignoring works
 
-**When the user runs `/ai-factory.security-checklist ignore <item>`:**
+**When the user runs `/flz.security-checklist ignore <item>`:**
 
-1. Read the current `.ai-factory/SECURITY.md` file (create if doesn't exist)
+1. Read the current `.flz/SECURITY.md` file (create if doesn't exist)
 2. Ask the user for the reason why this item should be ignored
 3. Add the item to the file following the format below
 4. Confirm the item was added
 
-**When running any audit (`/ai-factory.security-checklist` or a specific category):**
+**When running any audit (`/flz.security-checklist` or a specific category):**
 
-1. Read `.ai-factory/SECURITY.md` at the start
+1. Read `.flz/SECURITY.md` at the start
 2. For each ignored item that matches the current audit scope:
    - Do NOT flag it as a finding
    - Instead, show it in a separate section at the end: **"⏭️ Ignored Items"**
    - Display each ignored item with its reason and date, so the team stays aware
 3. Non-ignored items are audited as usual
 
-### `.ai-factory/SECURITY.md` format
+### `.flz/SECURITY.md` format
 
 ```markdown
 # Security: Ignored Items
@@ -77,14 +77,14 @@ Review periodically — ignored risks may become relevant.
 When audit results are shown, append this section at the end:
 
 ```
-⏭️ Ignored Items (from .ai-factory/SECURITY.md)
+⏭️ Ignored Items (from .flz/SECURITY.md)
 ┌─────────────────┬──────────────────────────────────────┬────────────┐
 │ Item            │ Reason                               │ Date       │
 ├─────────────────┼──────────────────────────────────────┼────────────┤
 │ no-csrf         │ SPA with token auth, no cookies used │ 2025-03-15 │
 │ no-rate-limit   │ Internal service, behind API gateway │ 2025-03-15 │
 └─────────────────┴──────────────────────────────────────┴────────────┘
-⚠️  2 items ignored. Run `/ai-factory.security-checklist` without ignores to see full audit.
+⚠️  2 items ignored. Run `/flz.security-checklist` without ignores to see full audit.
 ```
 
 ---

@@ -1,6 +1,6 @@
 ---
-name: ai-factory.evolve
-description: Self-improve AI Factory skills based on project context, accumulated patches, and codebase patterns. Analyzes what went wrong, what works, and enhances skills to prevent future issues. Use when you want to make AI smarter for your project.
+name: flz.evolve
+description: Self-improve FLZ skills based on project context, accumulated patches, and codebase patterns. Analyzes what went wrong, what works, and enhances skills to prevent future issues. Use when you want to make AI smarter for your project.
 argument-hint: '[skill-name or "all"]'
 allowed-tools: Read Write Edit Glob Grep Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 # Evolve - Skill Self-Improvement
 
-Analyze project context, patches, and codebase to improve existing skills. Makes AI Factory smarter with every run.
+Analyze project context, patches, and codebase to improve existing skills. Makes FLZ smarter with every run.
 
 ## Core Idea
 
@@ -24,7 +24,7 @@ enhance skills with project-specific rules, guards, and patterns
 
 ### Step 0: Load Context
 
-**Read `.ai-factory/DESCRIPTION.md`** to understand:
+**Read `.flz/DESCRIPTION.md`** to understand:
 - Tech stack
 - Architecture
 - Conventions
@@ -34,7 +34,7 @@ enhance skills with project-specific rules, guards, and patterns
 **1.1: Read all patches**
 
 ```
-Glob: .ai-factory/patches/*.md
+Glob: .flz/patches/*.md
 ```
 
 Read every patch. For each one, extract:
@@ -84,10 +84,10 @@ For each skill, identify what's missing based on collected intelligence:
 **3.1: Patch-driven gaps**
 
 Compare patch patterns against skill instructions:
-- Does `/ai-factory.fix` mention the most common error categories from patches? If not → add them
-- Does `/ai-factory.implement` warn about the pitfalls found in patches? If not → add guards
-- Does `/ai-factory.task` include logging/validation requirements for problem areas? If not → enhance
-- Does `/ai-factory.review` check for the patterns that caused bugs? If not → add checklist items
+- Does `/flz.fix` mention the most common error categories from patches? If not → add them
+- Does `/flz.implement` warn about the pitfalls found in patches? If not → add guards
+- Does `/flz.task` include logging/validation requirements for problem areas? If not → enhance
+- Does `/flz.review` check for the patterns that caused bugs? If not → add checklist items
 
 **3.2: Tech-stack gaps**
 
@@ -143,18 +143,18 @@ Based on:
 
 ### Proposed Improvements
 
-#### /ai-factory.fix
+#### /flz.fix
 1. **Add null-check guard** — 5 patches involved null references
    → Add to Step 2: "Check for optional/nullable fields before accessing nested properties"
 
 2. **Add async/await pattern** — 3 patches involved unhandled promises
    → Add to Important Rules: "Always use try/catch with async/await"
 
-#### /ai-factory.implement
+#### /flz.implement
 1. **Add Prisma-specific warning** — 2 patches from incorrect Prisma queries
    → Add to Logging: "Log all Prisma queries in DEBUG mode"
 
-#### /ai-factory.review
+#### /flz.review
 1. **Add checklist item** — optional chaining not checked
    → Add to Correctness: "Optional chaining for nullable relations"
 
@@ -173,10 +173,10 @@ For each approved improvement:
 
 **5.3: Save evolution log**
 
-Create `.ai-factory/evolutions/YYYY-MM-DD-HH.mm.md`:
+Create `.flz/evolutions/YYYY-MM-DD-HH.mm.md`:
 
 ```bash
-mkdir -p .ai-factory/evolutions
+mkdir -p .flz/evolutions
 ```
 
 ```markdown
@@ -210,10 +210,10 @@ Improvements applied: Y
 
 ### Recommendations
 
-1. **Run `/ai-factory.review`** on recent code to verify improvements
-2. **Next evolution** — run `/ai-factory.evolve` again after 5-10 more fixes
+1. **Run `/flz.review`** on recent code to verify improvements
+2. **Next evolution** — run `/flz.evolve` again after 5-10 more fixes
 3. **Consider new skill** — if pattern X keeps recurring, create a dedicated skill:
-   `/ai-factory.skill-generator <skill-name>`
+   `/flz.skill-generator <skill-name>`
 ```
 
 ### Context Cleanup
@@ -233,12 +233,12 @@ Options:
 
 | Skill | Learns From | Example Enhancement |
 |-------|-------------|---------------------|
-| `/ai-factory.fix` | Patches → common errors | "Check for X before accessing Y" |
-| `/ai-factory.implement` | Patches → prevention rules | "When creating models, always validate Z" |
-| `/ai-factory.task` | Patches → logging gaps | "Add validation task for nullable fields" |
-| `/ai-factory.review` | Patches → missed issues | "Check: are all optional relations null-safe?" |
-| `/ai-factory.commit` | Codebase → conventions | "Use project's commit prefix format" |
-| `/ai-factory.feature` | Codebase → patterns | "Default branch prefix based on project convention" |
+| `/flz.fix` | Patches → common errors | "Check for X before accessing Y" |
+| `/flz.implement` | Patches → prevention rules | "When creating models, always validate Z" |
+| `/flz.task` | Patches → logging gaps | "Add validation task for nullable fields" |
+| `/flz.review` | Patches → missed issues | "Check: are all optional relations null-safe?" |
+| `/flz.commit` | Codebase → conventions | "Use project's commit prefix format" |
+| `/flz.feature` | Codebase → patterns | "Default branch prefix based on project convention" |
 
 ## Important Rules
 
@@ -254,44 +254,44 @@ Options:
 ### Example 1: After 10 fixes with null-reference patterns
 
 ```
-/ai-factory.evolve fix
+/flz.evolve fix
 
 → Found 6/10 patches tagged #null-check
-→ Improvement: Add to /ai-factory.fix Step 2:
+→ Improvement: Add to /flz.fix Step 2:
   "PRIORITY CHECK: Look for optional/nullable fields accessed
    without null guards. This is the #1 source of bugs in this project."
-→ Improvement: Add to /ai-factory.review checklist:
+→ Improvement: Add to /flz.review checklist:
   "- [ ] All nullable DB fields have null checks in UI/API layer"
 ```
 
 ### Example 2: Laravel project with N+1 issues
 
 ```
-/ai-factory.evolve all
+/flz.evolve all
 
 → Stack: Laravel + Eloquent (from DESCRIPTION.md)
 → Found 3 patches tagged #n-plus-one #database
-→ Improvement: Add to /ai-factory.implement logging:
+→ Improvement: Add to /flz.implement logging:
   "Enable query logging: DB::enableQueryLog() in DEBUG mode"
-→ Improvement: Add to /ai-factory.review checklist:
+→ Improvement: Add to /flz.review checklist:
   "- [ ] Eager loading used for related models (no N+1)"
-→ Improvement: Add to /ai-factory.task descriptions:
+→ Improvement: Add to /flz.task descriptions:
   "Include 'use ->with() for relations' in DB-related tasks"
 ```
 
 ### Example 3: First run with no patches
 
 ```
-/ai-factory.evolve
+/flz.evolve
 
 → No patches found (first run)
 → Analyzing project context only...
 → Stack: Next.js 14 + Prisma + TypeScript
-→ Improvement: Add to /ai-factory.implement:
+→ Improvement: Add to /flz.implement:
   "Use server actions for mutations, API routes for external APIs"
-→ Improvement: Add to /ai-factory.fix:
+→ Improvement: Add to /flz.fix:
   "For Prisma errors, check schema.prisma for field types first"
-→ Improvement: Add to /ai-factory.review:
+→ Improvement: Add to /flz.review:
   "- [ ] Server components don't use client-only hooks"
 ```
 
@@ -299,6 +299,6 @@ Options:
 - Do not rewrite entire skills
 - Do not remove existing rules
 - Do not add generic advice ("write clean code")
-- Do not create new skills (suggest using `/ai-factory.skill-generator` instead)
+- Do not create new skills (suggest using `/flz.skill-generator` instead)
 - Do not apply changes without user approval
 - Do not evolve skills not installed in the project

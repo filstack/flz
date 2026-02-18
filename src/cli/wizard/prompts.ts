@@ -19,7 +19,7 @@ export async function runWizard(projectDir: string): Promise<WizardAnswers> {
 
   // Base skills that are always recommended
   const baseSkills = [
-    'ai-factory',
+    'flz',
     'skill-generator',
     'feature',
     'task',
@@ -33,10 +33,10 @@ export async function runWizard(projectDir: string): Promise<WizardAnswers> {
     if (detectedStack.frameworks.length > 0) {
       console.log(`   Frameworks: ${detectedStack.frameworks.join(', ')}`);
     }
-    console.log(`\n💡 Run /ai-factory after setup to generate stack-specific skills.\n`);
+    console.log(`\n💡 Run /flz after setup to generate stack-specific skills.\n`);
   } else {
     console.log('\n📦 No existing project detected.');
-    console.log('💡 Run /ai-factory after setup to analyze or describe your project.\n');
+    console.log('💡 Run /flz after setup to analyze or describe your project.\n');
   }
 
   const answers = await inquirer.prompt([

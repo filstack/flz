@@ -1,5 +1,5 @@
 ---
-name: ai-factory.build-automation
+name: flz.build-automation
 description: >-
   Analyze project and generate or enhance build automation file (Makefile, Taskfile.yml, Justfile, Magefile.go).
   If a build file already exists, improves it by adding missing targets and best practices.
@@ -8,7 +8,7 @@ argument-hint: "[makefile|taskfile|justfile|mage]"
 allowed-tools: Read Edit Glob Grep Write Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: build-automation
 ---
@@ -28,7 +28,7 @@ Generate or enhance a build automation file for any project. Supports Makefile, 
 Read the project description if available:
 
 ```
-Read .ai-factory/DESCRIPTION.md
+Read .flz/DESCRIPTION.md
 ```
 
 Store the project context (tech stack, framework, architecture) for use in later steps. If the file doesn't exist, that's fine — we'll detect everything in Step 2.
@@ -625,7 +625,7 @@ Options:
 ```
 
 If the user chooses to create it, generate a minimal `AGENTS.md` with:
-- Project name and brief description (from `PROJECT_PROFILE` or `.ai-factory/DESCRIPTION.md`)
+- Project name and brief description (from `PROJECT_PROFILE` or `.flz/DESCRIPTION.md`)
 - Build commands section (as above)
 - Key project conventions (language, test framework, linter — so AI agents run the right commands)
 

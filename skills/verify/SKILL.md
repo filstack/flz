@@ -1,14 +1,14 @@
 ---
-name: ai-factory.verify
+name: flz.verify
 description: >-
   Verify completed implementation against the plan. Checks that all tasks were fully implemented,
   nothing was forgotten, code compiles, tests pass, and quality standards are met.
-  Use after "/ai-factory.implement" completes, or when user says "verify", "check work", "did we miss anything".
+  Use after "/flz.implement" completes, or when user says "verify", "check work", "did we miss anything".
 argument-hint: "[--strict]"
 allowed-tools: Read Edit Glob Grep Bash(git *) Bash(npm *) Bash(npx *) Bash(yarn *) Bash(pnpm *) Bash(bun *) Bash(go *) Bash(python *) Bash(php *) Bash(composer *) Bash(cargo *) Bash(make *) Bash(task *) Bash(just *) Bash(mage *) TaskList TaskGet AskUserQuestion Questions
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: quality
 ---
@@ -17,7 +17,7 @@ metadata:
 
 Verify that the completed implementation matches the plan, nothing was missed, and the code is production-ready.
 
-**This skill is optional** — invoked after `/ai-factory.implement` finishes all tasks, or manually at any time.
+**This skill is optional** — invoked after `/flz.implement` finishes all tasks, or manually at any time.
 
 ---
 
@@ -25,13 +25,13 @@ Verify that the completed implementation matches the plan, nothing was missed, a
 
 ### 0.1 Find Plan File
 
-Same logic as `/ai-factory.implement`:
+Same logic as `/flz.implement`:
 
 ```
-1. .ai-factory/PLAN.md exists? → Use it
+1. .flz/PLAN.md exists? → Use it
 2. No PLAN.md → Check current git branch:
    git branch --show-current
-   → Look for .ai-factory/features/<branch-name>.md
+   → Look for .flz/features/<branch-name>.md
 ```
 
 If no plan file found:
@@ -48,7 +48,7 @@ Options:
 
 - Read the plan file to understand what was supposed to be implemented
 - `TaskList` → get all tasks and their statuses
-- Read `.ai-factory/DESCRIPTION.md` for project context (tech stack, conventions)
+- Read `.flz/DESCRIPTION.md` for project context (tech stack, conventions)
 
 ### 0.3 Gather Changed Files
 
@@ -200,7 +200,7 @@ Cross-reference with `.env.example`, `.env.local`, README, or docs to ensure the
 
 ### 3.4 DESCRIPTION.md Sync
 
-Check if `.ai-factory/DESCRIPTION.md` reflects the current state:
+Check if `.flz/DESCRIPTION.md` reflects the current state:
 
 - New dependencies/libraries added during implementation → should be listed
 - Architecture changes → should be reflected
@@ -265,7 +265,7 @@ Options:
 ```
 
 **If "Fix now" or "Fix critical only":**
-- For each incomplete/partial task — implement the missing pieces directly (follow the same implementation rules as `/ai-factory.implement`)
+- For each incomplete/partial task — implement the missing pieces directly (follow the same implementation rules as `/flz.implement`)
 - For TODOs/debug artifacts — clean them up
 - For undocumented config — update `.env.example` and docs
 - After fixing, re-run the relevant verification checks to confirm
@@ -285,9 +285,9 @@ After verification is complete (all green or issues accepted), suggest optional 
 
 All tasks verified. Suggested next steps:
 
-1. 🔒 /ai-factory.security-checklist — Run security audit on the new code
-2. 👀 /ai-factory.review — Code review of the implementation
-3. 💾 /ai-factory.commit — Commit the changes
+1. 🔒 /flz.security-checklist — Run security audit on the new code
+2. 👀 /flz.review — Code review of the implementation
+3. 💾 /flz.commit — Commit the changes
 
 Which would you like to run? (or skip all)
 ```
@@ -296,16 +296,16 @@ Which would you like to run? (or skip all)
 AskUserQuestion: Run additional checks?
 
 Options:
-1. Security check — Run /ai-factory.security-checklist on changed files
-2. Code review — Run /ai-factory.review on the implementation
+1. Security check — Run /flz.security-checklist on changed files
+2. Code review — Run /flz.review on the implementation
 3. Both — Run security check, then code review
 4. Skip — Proceed to commit
 ```
 
-**If security check selected** → suggest invoking `/ai-factory.security-checklist`
-**If code review selected** → suggest invoking `/ai-factory.review`
+**If security check selected** → suggest invoking `/flz.security-checklist`
+**If code review selected** → suggest invoking `/flz.review`
 **If both** → suggest security first, then review
-**If skip** → suggest `/ai-factory.commit`
+**If skip** → suggest `/flz.commit`
 
 ### Context Cleanup
 
@@ -327,7 +327,7 @@ Options:
 When invoked with `--strict`:
 
 ```
-/ai-factory.verify --strict
+/flz.verify --strict
 ```
 
 - **All tasks must be COMPLETE** — no partial or skipped allowed
@@ -345,16 +345,16 @@ Strict mode is recommended before merging to main or creating a pull request.
 
 ### After implement (suggested automatically)
 ```
-/ai-factory.verify
+/flz.verify
 ```
 
 ### Strict mode before merge
 ```
-/ai-factory.verify --strict
+/flz.verify --strict
 ```
 
 ### Standalone (no plan, verify branch diff)
 ```
-/ai-factory.verify
+/flz.verify
 → No plan found → verify branch diff against main
 ```

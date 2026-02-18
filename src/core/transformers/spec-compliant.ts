@@ -4,7 +4,7 @@ import { sanitizeName, extractFrontmatterName, replaceFrontmatterName } from '..
 /**
  * Transformer that enforces Agent Skills spec naming rules:
  * - Skill names must be lowercase alphanumeric with hyphens
- * - Dots in names are replaced with hyphens (e.g. ai-factory.feature → ai-factory-feature)
+ * - Dots in names are replaced with hyphens (e.g. flz.feature → flz-feature)
  *
  * Used by agents that strictly validate skill names against the spec.
  */
