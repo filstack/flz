@@ -1,12 +1,10 @@
-![logo](https://github.com/filstack/flz/raw/main/art/promo.png)
-
 # FLZ
 
-> **Stop configuring. Start building.**
+> **Хватит настраивать. Пора строить.**
 
-You want to build with AI, but setting up the right context, prompts, and workflows takes time. FLZ handles all of that so you can focus on what matters — shipping quality code.
+Хотите разрабатывать с ИИ, но настройка контекста, промптов и воркфлоу отнимает время. FLZ берёт это на себя, чтобы вы могли сосредоточиться на главном — выпуске кода.
 
-**One command. Full AI-powered development environment.**
+**Одна команда. Полноценная среда разработки с ИИ.**
 
 ```bash
 flz init
@@ -14,142 +12,140 @@ flz init
 
 ---
 
-## Why FLZ?
+## Почему FLZ?
 
-- **Zero configuration** — detects your stack, installs relevant skills, configures integrations
-- **Best practices built-in** — logging, commits, code review, all following industry standards
-- **Spec-driven development** — AI follows plans, not random exploration. Predictable, resumable, reviewable
-- **Community skills** — leverage [skills.sh](https://skills.sh) ecosystem or generate custom skills
-- **Works with your stack** — Next.js, Laravel, Django, Express, and more
-- **Multi-agent support** — Claude Code, Cursor, Windsurf, Roo Code, Kilo Code, Antigravity, OpenCode, Warp, Zencoder, Codex CLI, GitHub Copilot, Gemini CLI, Junie, or [any agent](docs/getting-started.md#supported-agents)
+- **Нулевая конфигурация** — определяет ваш стек, устанавливает нужные скиллы, настраивает интеграции
+- **Лучшие практики из коробки** — логирование, коммиты, код-ревью по стандартам индустрии
+- **Спецификация вместо хаоса** — ИИ следует плану, а не блуждает по коду. Предсказуемо, возобновляемо, проверяемо
+- **Скиллы от сообщества** — экосистема [skills.sh](https://skills.sh) или генерация собственных скиллов
+- **Работает с вашим стеком** — Next.js, Laravel, Django, Express и другие
+- **Мультиагентность** — Claude Code, Cursor, Windsurf, Roo Code, Kilo Code, Antigravity, OpenCode, Warp, Zencoder, Codex CLI, GitHub Copilot, Gemini CLI, Junie или [любой другой агент](docs/getting-started.md#supported-agents)
 
 ---
 
-## Installation
+## Установка
 
-### Using npm
+### Через npm
 
 ```bash
 npm install -g flz
 ```
 
-### Using mise
+### Через mise
 
 ```bash
 mise use -g npm:flz
 ```
 
-## Quick Start
+## Быстрый старт
 
 ```bash
-# In your project directory
+# В директории вашего проекта
 flz init
 ```
 
-This will:
-- Ask which AI agent you use
-- Detect your project stack
-- Install relevant skills
-- Configure MCP servers (for supported agents)
+Что произойдёт:
+- Спросит, какой ИИ-агент вы используете
+- Определит стек проекта
+- Установит подходящие скиллы
+- Настроит MCP-серверы (для поддерживаемых агентов)
 
-Then open your AI agent and start working:
+Затем откройте ИИ-агент и начинайте работать:
 
 ```
 /aif
 ```
 
-## Usage
+## Использование
 
-If the package is installed:
+Если пакет установлен:
 ```bash
 flz init
 ```
 
-Or running without installation via `npx`:
+Или запуск без установки через `npx`:
 ```bash
 npx flz init
 ```
 
-### Upgrading from v1 to v2
+### Обновление с v1 на v2
 
 ```bash
 flz upgrade
 ```
 
-This removes old bare-named skills (`commit`, `feature`, etc.) and installs new `aif-*` prefixed versions. Custom skills are preserved.
+Удаляет старые скиллы с простыми именами (`commit`, `feature` и т.д.) и устанавливает новые с префиксом `aif-*`. Пользовательские скиллы сохраняются.
 
-### Example Workflow
+### Пример рабочего процесса
 
 ```bash
-# Plan a feature — creates branch, analyzes codebase, builds step-by-step plan
-/aif-plan Add user authentication with OAuth
+# Планирование фичи — создаёт ветку, анализирует кодовую базу, строит пошаговый план
+/aif-plan Добавить аутентификацию пользователей через OAuth
 
-# Optionally refine the plan with deeper analysis
+# Опционально — доработка плана с глубоким анализом
 /aif-improve
 
-# Execute the plan — implements tasks one by one, commits at checkpoints
+# Выполнение плана — реализует задачи одну за другой, коммитит на контрольных точках
 /aif-implement
 
-# Fix a bug — AI learns from every fix and gets smarter over time
+# Исправление бага — ИИ учится на каждом фиксе и становится умнее
 /aif-fix TypeError: Cannot read property 'name' of undefined
 
-# Set up CI pipeline — GitHub Actions or GitLab CI with linting, SA, tests
+# Настройка CI — GitHub Actions или GitLab CI с линтингом, статическим анализом, тестами
 /aif-ci github
 
-# Generate project documentation — README + docs/ with topics
+# Генерация документации — README + docs/ по темам
 /aif-docs
 ```
 
-See the full [Development Workflow](docs/workflow.md) with diagram and decision table.
+Полный [рабочий процесс разработки](docs/workflow.md) с диаграммой и таблицей решений.
 
-### Auto-Generated Documentation
+### Автогенерация документации
 
-FLZ can generate and maintain your project docs with a single command:
+FLZ может генерировать и поддерживать документацию проекта одной командой:
 
 ```bash
-/aif-docs          # Creates README + docs/ structure from your codebase
-/aif-docs --web    # Also generates a static HTML documentation site
+/aif-docs          # Создаёт README + структуру docs/ из вашей кодовой базы
+/aif-docs --web    # Также генерирует статический HTML-сайт документации
 ```
 
-- **Generates docs from scratch** — analyzes your codebase and creates a lean README + detailed `docs/` pages by topic
-- **Cleans up scattered files** — finds loose CONTRIBUTING.md, ARCHITECTURE.md, SETUP.md in your root and consolidates them into a structured `docs/` directory
-- **Keeps docs in sync** — integrates with `/aif-implement` so documentation is updated automatically after each feature
-- **Builds a docs website** — `--web` generates a static HTML site with navigation and dark mode, ready to host
+- **Генерация с нуля** — анализирует код и создаёт лаконичный README + детальные страницы `docs/` по темам
+- **Наведение порядка** — находит разбросанные CONTRIBUTING.md, ARCHITECTURE.md, SETUP.md и объединяет их в структурированный `docs/`
+- **Синхронизация** — интегрируется с `/aif-implement`, документация обновляется автоматически после каждой фичи
+- **Сайт документации** — `--web` генерирует статический HTML с навигацией и тёмной темой
 
 ---
 
-## Documentation
+## Документация
 
-| Guide | Description |
-|-------|-------------|
-| [Getting Started](docs/getting-started.md) | What is FLZ, supported agents, CLI commands |
-| [Development Workflow](docs/workflow.md) | Workflow diagram, when to use what, spec-driven approach |
-| [Core Skills](docs/skills.md) | All slash commands — feature, task, fix, implement, evolve, docs, and more |
-| [Plan Files](docs/plan-files.md) | Plan files, self-improvement patches, skill acquisition |
-| [Security](docs/security.md) | Two-level security scanning for external skills |
-| [Configuration](docs/configuration.md) | `.flz.json`, MCP servers, project structure, best practices |
+| Раздел | Описание |
+|--------|----------|
+| [Начало работы](docs/getting-started.md) | Что такое FLZ, поддерживаемые агенты, CLI-команды |
+| [Рабочий процесс](docs/workflow.md) | Диаграмма воркфлоу, когда что использовать, спец-ориентированный подход |
+| [Основные скиллы](docs/skills.md) | Все слэш-команды — feature, task, fix, implement, evolve, docs и другие |
+| [Файлы планов](docs/plan-files.md) | Файлы планов, патчи самоулучшения, подключение скиллов |
+| [Безопасность](docs/security.md) | Двухуровневое сканирование безопасности внешних скиллов |
+| [Конфигурация](docs/configuration.md) | `.flz.json`, MCP-серверы, структура проекта, лучшие практики |
 
 ---
 
-![happy](https://github.com/filstack/flz/raw/main/art/happy.png)
+## Ссылки
 
-## Links
+- [skills.sh](https://skills.sh) — маркетплейс скиллов
+- [Agent Skills Spec](https://agentskills.io) — спецификация скиллов
+- [Claude Code](https://claude.ai/code) — ИИ-агент от Anthropic
+- [Cursor](https://cursor.com) — редактор кода с ИИ
+- [OpenCode](https://opencode.ai) — open-source ИИ-агент
+- [Roo Code](https://roocode.com) — ИИ-агент для VS Code
+- [Kilo Code](https://kilo.ai) — open-source платформа агентного кодинга
+- [Windsurf](https://windsurf.com) — редактор кода с ИИ от Codeium
+- [Warp](https://www.warp.dev) — умный терминал с ИИ-агентом
+- [Zencoder](https://zencoder.ai) — ИИ-агент для VS Code и JetBrains
+- [Codex CLI](https://github.com/openai/codex) — агент от OpenAI
+- [Gemini CLI](https://github.com/google-gemini/gemini-cli) — агент от Google
+- [Antigravity](https://antigravity.dev) — ИИ-агент для кодинга
+- [Junie](https://www.jetbrains.com/junie/) — ИИ-агент от JetBrains
 
-- [skills.sh](https://skills.sh) - Skill marketplace
-- [Agent Skills Spec](https://agentskills.io) - Skill specification
-- [Claude Code](https://claude.ai/code) - Anthropic's AI coding agent
-- [Cursor](https://cursor.com) - AI-powered code editor
-- [OpenCode](https://opencode.ai) - Open-source AI coding agent
-- [Roo Code](https://roocode.com) - AI coding agent for VS Code
-- [Kilo Code](https://kilo.ai) - Open-source agentic coding platform
-- [Windsurf](https://windsurf.com) - AI-powered code editor by Codeium
-- [Warp](https://www.warp.dev) - Intelligent terminal with AI agent
-- [Zencoder](https://zencoder.ai) - AI coding agent for VS Code and JetBrains
-- [Codex CLI](https://github.com/openai/codex) - OpenAI's coding agent
-- [Gemini CLI](https://github.com/google-gemini/gemini-cli) - Google's coding agent
-- [Antigravity](https://antigravity.dev) - AI coding agent
-- [Junie](https://www.jetbrains.com/junie/) - JetBrains' AI coding agent
-
-## License
+## Лицензия
 
 MIT
