@@ -2,12 +2,12 @@
 
 # Plan Files
 
-AI Factory uses markdown files to track implementation plans:
+FLZ uses markdown files to track implementation plans:
 
 | Source | Plan File | After Completion |
 |--------|-----------|------------------|
-| `/aif-plan fast` | `.ai-factory/PLAN.md` | Offer to delete |
-| `/aif-plan full` | `.ai-factory/plans/<branch-name>.md` | Keep (user decides) |
+| `/aif-plan fast` | `.flz/PLAN.md` | Offer to delete |
+| `/aif-plan full` | `.flz/plans/<branch-name>.md` | Keep (user decides) |
 
 **Example plan file:**
 
@@ -39,7 +39,7 @@ Created: 2024-01-15
 
 ## Self-Improvement Patches
 
-AI Factory has a built-in learning loop. Every bug fix creates a **patch** — a structured knowledge artifact that helps AI avoid the same mistakes in the future.
+FLZ has a built-in learning loop. Every bug fix creates a **patch** — a structured knowledge artifact that helps AI avoid the same mistakes in the future.
 
 ```
 /aif-fix → finds bug → fixes it → creates patch → next /aif-fix or /aif-implement reads all patches → better code
@@ -47,12 +47,12 @@ AI Factory has a built-in learning loop. Every bug fix creates a **patch** — a
 
 **How it works:**
 
-1. `/aif-fix` fixes a bug and creates a patch file in `.ai-factory/patches/YYYY-MM-DD-HH.mm.md`
+1. `/aif-fix` fixes a bug and creates a patch file in `.flz/patches/YYYY-MM-DD-HH.mm.md`
 2. Each patch documents: **Problem**, **Root Cause**, **Solution**, **Prevention**, and **Tags**
 3. Before any `/aif-fix` or `/aif-implement`, AI reads all existing patches
 4. AI applies lessons learned — avoids patterns that caused bugs, follows patterns that prevented them
 
-**Example patch** (`.ai-factory/patches/2026-02-07-14.30.md`):
+**Example patch** (`.flz/patches/2026-02-07-14.30.md`):
 
 ```markdown
 # Null reference in UserProfile when user has no avatar
@@ -90,7 +90,7 @@ This closes the full learning loop: **fix → patch → evolve → better skills
 
 ## Skill Acquisition Strategy
 
-AI Factory follows this strategy for skills:
+FLZ follows this strategy for skills:
 
 ```
 For each recommended skill:

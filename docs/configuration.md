@@ -2,7 +2,7 @@
 
 # Configuration
 
-## `.ai-factory.json`
+## `.flz.json`
 
 ```json
 {
@@ -38,7 +38,7 @@ The `agents` array can include any supported agent IDs: `claude`, `cursor`, `win
 
 ## MCP Configuration
 
-AI Factory can configure these MCP servers:
+FLZ can configure these MCP servers:
 
 | MCP Server | Use Case | Env Variable |
 |------------|----------|--------------|
@@ -69,7 +69,7 @@ your-project/
 │   │   ├── aif-review/
 │   │   └── aif-skill-generator/
 │   └── settings.local.json    # MCP config (Claude/Cursor, gitignored)
-├── .ai-factory/               # AI Factory working directory
+├── .flz/               # FLZ working directory
 │   ├── DESCRIPTION.md         # Project specification
 │   ├── ARCHITECTURE.md        # Architecture decisions and guidelines
 │   ├── PLAN.md                # Current plan (from /aif-plan fast)
@@ -80,7 +80,7 @@ your-project/
 │   │   └── 2026-02-07-14.30.md
 │   └── evolutions/            # Evolution logs (from /aif-evolve)
 │       └── 2026-02-08-10.00.md
-└── .ai-factory.json           # AI Factory config
+└── .flz.json           # FLZ config
 ```
 
 ## Best Practices

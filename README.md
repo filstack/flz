@@ -1,21 +1,20 @@
-![logo](https://github.com/lee-to/ai-factory/raw/main/art/promo.png)
-![logo](https://github.com/lee-to/ai-factory/raw/main/art/promo.png)
+![logo](https://github.com/filstack/flz/raw/main/art/promo.png)
 
-# AI Factory
+# FLZ
 
 > **Stop configuring. Start building.**
 
-You want to build with AI, but setting up the right context, prompts, and workflows takes time. AI Factory handles all of that so you can focus on what matters — shipping quality code.
+You want to build with AI, but setting up the right context, prompts, and workflows takes time. FLZ handles all of that so you can focus on what matters — shipping quality code.
 
 **One command. Full AI-powered development environment.**
 
 ```bash
-ai-factory init
+flz init
 ```
 
 ---
 
-## Why AI Factory?
+## Why FLZ?
 
 - **Zero configuration** — detects your stack, installs relevant skills, configures integrations
 - **Best practices built-in** — logging, commits, code review, all following industry standards
@@ -31,20 +30,20 @@ ai-factory init
 ### Using npm
 
 ```bash
-npm install -g ai-factory
+npm install -g flz
 ```
 
 ### Using mise
 
 ```bash
-mise use -g npm:ai-factory
+mise use -g npm:flz
 ```
 
 ## Quick Start
 
 ```bash
 # In your project directory
-ai-factory init
+flz init
 ```
 
 This will:
@@ -63,18 +62,18 @@ Then open your AI agent and start working:
 
 If the package is installed:
 ```bash
-ai-factory init
+flz init
 ```
 
 Or running without installation via `npx`:
 ```bash
-npx ai-factory init
+npx flz init
 ```
 
 ### Upgrading from v1 to v2
 
 ```bash
-ai-factory upgrade
+flz upgrade
 ```
 
 This removes old bare-named skills (`commit`, `feature`, etc.) and installs new `aif-*` prefixed versions. Custom skills are preserved.
@@ -105,7 +104,7 @@ See the full [Development Workflow](docs/workflow.md) with diagram and decision 
 
 ### Auto-Generated Documentation
 
-AI Factory can generate and maintain your project docs with a single command:
+FLZ can generate and maintain your project docs with a single command:
 
 ```bash
 /aif-docs          # Creates README + docs/ structure from your codebase
@@ -123,16 +122,16 @@ AI Factory can generate and maintain your project docs with a single command:
 
 | Guide | Description |
 |-------|-------------|
-| [Getting Started](docs/getting-started.md) | What is AI Factory, supported agents, CLI commands |
+| [Getting Started](docs/getting-started.md) | What is FLZ, supported agents, CLI commands |
 | [Development Workflow](docs/workflow.md) | Workflow diagram, when to use what, spec-driven approach |
 | [Core Skills](docs/skills.md) | All slash commands — feature, task, fix, implement, evolve, docs, and more |
 | [Plan Files](docs/plan-files.md) | Plan files, self-improvement patches, skill acquisition |
 | [Security](docs/security.md) | Two-level security scanning for external skills |
-| [Configuration](docs/configuration.md) | `.ai-factory.json`, MCP servers, project structure, best practices |
+| [Configuration](docs/configuration.md) | `.flz.json`, MCP servers, project structure, best practices |
 
 ---
 
-![happy](https://github.com/lee-to/ai-factory/raw/main/art/happy.png)
+![happy](https://github.com/filstack/flz/raw/main/art/happy.png)
 
 ## Links
 

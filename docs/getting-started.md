@@ -2,9 +2,9 @@
 
 # Getting Started
 
-## What is AI Factory?
+## What is FLZ?
 
-AI Factory is a CLI tool and skill system that:
+FLZ is a CLI tool and skill system that:
 
 1. **Analyzes your project** — detects tech stack from package.json, composer.json, requirements.txt, etc.
 2. **Installs relevant skills** — downloads from [skills.sh](https://skills.sh) or generates custom ones
@@ -13,7 +13,7 @@ AI Factory is a CLI tool and skill system that:
 
 ## Supported Agents
 
-AI Factory works with any AI coding agent. During `ai-factory init`, you choose one or more target agents and skills are installed to each agent's correct directory with paths adapted automatically:
+FLZ works with any AI coding agent. During `flz init`, you choose one or more target agents and skills are installed to each agent's correct directory with paths adapted automatically:
 
 | Agent | Config Directory | Skills Directory |
 |-------|-----------------|-----------------|
@@ -37,14 +37,14 @@ MCP server configuration is supported for Claude Code, Cursor, Roo Code, Kilo Co
 ## Your First Project
 
 ```bash
-# 1. Install AI Factory
-npm install -g ai-factory
+# 1. Install FLZ
+npm install -g flz
 
 # 2. Go to your project
 cd my-project
 
 # 3. Initialize — pick one or more agents, detect stack, install skills
-ai-factory init
+flz init
 
 # 4. Open your AI agent (Claude Code, Cursor, etc.) and run:
 /aif
@@ -53,23 +53,23 @@ ai-factory init
 /aif-plan Add user authentication with OAuth
 ```
 
-From here, AI Factory creates a branch, builds a plan, and you run `/aif-implement` to execute it step by step.
+From here, FLZ creates a branch, builds a plan, and you run `/aif-implement` to execute it step by step.
 
 ## CLI Commands
 
 ```bash
 # Initialize project
-ai-factory init
+flz init
 
 # Update skills to latest version
-ai-factory update
+flz update
 
 # Upgrade from v1 to v2 (removes old bare-named skills, installs aif-* prefixed)
-ai-factory upgrade
+flz upgrade
 ```
 
 ## Next Steps
 
 - [Development Workflow](workflow.md) — understand the full flow from plan to commit
 - [Core Skills](skills.md) — all available slash commands
-- [Configuration](configuration.md) — customize `.ai-factory.json` and MCP servers
+- [Configuration](configuration.md) — customize `.flz.json` and MCP servers

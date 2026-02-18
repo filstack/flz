@@ -9,7 +9,7 @@ argument-hint: "[--audit]"
 allowed-tools: Read Edit Glob Grep Write Bash(git *) Bash(docker *) AskUserQuestion Questions WebSearch WebFetch
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: infrastructure
 ---
@@ -33,7 +33,7 @@ Analyze a project and generate a complete, production-grade Docker setup: multi-
 Read the project description if available:
 
 ```
-Read .ai-factory/DESCRIPTION.md
+Read .flz/DESCRIPTION.md
 ```
 
 Store project context for later steps. If absent, Step 2 detects everything.

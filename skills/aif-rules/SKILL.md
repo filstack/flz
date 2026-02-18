@@ -1,14 +1,14 @@
 ---
 name: aif-rules
-description: Add project-specific rules and conventions to .ai-factory/RULES.md. Each invocation appends new rules. These rules are automatically loaded by /aif-implement before execution. Use when user says "add rule", "remember this", "convention", or "always do X".
+description: Add project-specific rules and conventions to .flz/RULES.md. Each invocation appends new rules. These rules are automatically loaded by /aif-implement before execution. Use when user says "add rule", "remember this", "convention", or "always do X".
 argument-hint: "[rule text or topic]"
 allowed-tools: Read Write Edit Glob Grep AskUserQuestion Questions
 disable-model-invocation: true
 ---
 
-# AI Factory Rules - Project Conventions
+# FLZ Rules - Project Conventions
 
-Add short, actionable rules and conventions for the current project. Rules are saved to `.ai-factory/RULES.md` and automatically loaded by `/aif-implement` before task execution.
+Add short, actionable rules and conventions for the current project. Rules are saved to `.flz/RULES.md` and automatically loaded by `/aif-implement` before task execution.
 
 ## Workflow
 
@@ -55,10 +55,10 @@ Examples:
 
 ### Step 2: Read or Create RULES.md
 
-**Check if `.ai-factory/RULES.md` exists:**
+**Check if `.flz/RULES.md` exists:**
 
 ```
-Glob: .ai-factory/RULES.md
+Glob: .flz/RULES.md
 ```
 
 **If file does NOT exist** → create it with the header and first rule:
@@ -89,7 +89,7 @@ Use `Edit` to append the new rule as a `- ` list item at the end of the `## Rule
 ### Step 4: Confirm
 
 ```
-✅ Rule added to .ai-factory/RULES.md:
+✅ Rule added to .flz/RULES.md:
 
 - [the rule]
 
@@ -102,4 +102,4 @@ Total rules: [count]
 2. **No categories** — keep it simple, no headers inside the rules section
 3. **No duplicates** — check for existing rules with the same meaning before adding
 4. **Actionable language** — rules should be clear directives ("Always...", "Never...", "Use...", "Routes must...")
-5. **RULES.md location** — always `.ai-factory/RULES.md`, create `.ai-factory/` directory if needed
+5. **RULES.md location** — always `.flz/RULES.md`, create `.flz/` directory if needed

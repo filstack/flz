@@ -32,19 +32,19 @@ async function removeAgentSetup(projectDir: string, agent: AgentInstallation): P
   }
 
   // Keep agent settings file intact: it may contain user-managed configuration
-  // unrelated to AI Factory.
+  // unrelated to FLZ.
 }
 
 export async function initCommand(): Promise<void> {
   const projectDir = process.cwd();
 
-  console.log(chalk.bold.blue('\n🏭 AI Factory - Project Setup\n'));
+  console.log(chalk.bold.blue('\n🏭 FLZ - Project Setup\n'));
 
   const hasExistingConfig = await configExists(projectDir);
   const existingConfig = hasExistingConfig ? await loadConfig(projectDir) : null;
 
   if (hasExistingConfig) {
-    console.log(chalk.yellow('Warning: .ai-factory.json already exists.'));
+    console.log(chalk.yellow('Warning: .flz.json already exists.'));
     console.log('Running init will reconfigure selected agents (add/remove) and reinstall base skills.\n');
   }
 
@@ -108,7 +108,7 @@ export async function initCommand(): Promise<void> {
       agents: installedAgents,
     });
 
-    console.log(chalk.green('✓ Configuration saved to .ai-factory.json'));
+    console.log(chalk.green('✓ Configuration saved to .flz.json'));
 
     console.log(chalk.bold.green('\n✅ Setup complete!\n'));
 

@@ -8,7 +8,7 @@ argument-hint: "[makefile|taskfile|justfile|mage]"
 allowed-tools: Read Edit Glob Grep Write Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: build-automation
 ---
@@ -28,7 +28,7 @@ Generate or enhance a build automation file for any project. Supports Makefile, 
 Read the project description if available:
 
 ```
-Read .ai-factory/DESCRIPTION.md
+Read .flz/DESCRIPTION.md
 ```
 
 Store the project context (tech stack, framework, architecture) for use in later steps. If the file doesn't exist, that's fine — we'll detect everything in Step 2.

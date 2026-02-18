@@ -2,7 +2,7 @@
 
 # Development Workflow
 
-AI Factory has two phases: **configuration** (one-time project setup) and the **development workflow** (repeatable loop of plan → implement → verify → commit → evolve).
+FLZ has two phases: **configuration** (one-time project setup) and the **development workflow** (repeatable loop of plan → implement → verify → commit → evolve).
 
 ## Project Configuration
 
@@ -15,7 +15,7 @@ Run once per project. Sets up context files that all workflow skills depend on.
 
   ┌──────────────┐      ┌──────────────┐      ┌──────────────────────────┐
   │              │      │   claude     │      │                          │
-  │ ai-factory   │ ───▶ │ (or any AI   │ ───▶ │      /aif         │
+  │ flz   │ ───▶ │ (or any AI   │ ───▶ │      /aif         │
   │    init      │      │    agent)    │      │   (setup context)        │
   │              │      │              │      │                          │
   └──────────────┘      └──────────────┘      │  DESCRIPTION.md          │
@@ -50,7 +50,7 @@ Run once per project. Sets up context files that all workflow skills depend on.
 
 The repeatable development loop. Each skill feeds into the next, sharing context through plan files and patches.
 
-![workflow](https://github.com/lee-to/ai-factory/raw/main/art/workflow.png)
+![workflow](https://github.com/filstack/flz/raw/main/art/workflow.png)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -70,7 +70,7 @@ The repeatable development loop. Each skill feeds into the next, sharing context
                             │                                               │
                             │                                               ▼
                             │                                      ┌──────────────────┐
-                            │                                      │ .ai-factory/     │
+                            │                                      │ .flz/     │
                             │                                      │   patches/       │
                             │                                      │ Self-improvement │
                             └───────────────┬──────────────────────└────────┬─────────┘
@@ -141,12 +141,12 @@ The repeatable development loop. Each skill feeds into the next, sharing context
 
 | Command | Use Case | Creates Branch? | Creates Plan? |
 |---------|----------|-----------------|---------------|
-| `/aif-roadmap` | Strategic planning, milestones, long-term vision | No | `.ai-factory/ROADMAP.md` |
-| `/aif-plan fast` | Small tasks, quick fixes, experiments | No | `.ai-factory/PLAN.md` |
-| `/aif-plan full` | Full features, stories, epics | Yes | `.ai-factory/plans/<branch>.md` |
+| `/aif-roadmap` | Strategic planning, milestones, long-term vision | No | `.flz/ROADMAP.md` |
+| `/aif-plan fast` | Small tasks, quick fixes, experiments | No | `.flz/PLAN.md` |
+| `/aif-plan full` | Full features, stories, epics | Yes | `.flz/plans/<branch>.md` |
 | `/aif-plan full --parallel` | Concurrent features via worktrees | Yes + worktree | Autonomous end-to-end |
 | `/aif-improve` | Refine plan before implementation | No | No (improves existing) |
-| `/aif-fix` | Bug fixes, errors, hotfixes | No | Optional (`.ai-factory/FIX_PLAN.md`) |
+| `/aif-fix` | Bug fixes, errors, hotfixes | No | Optional (`.flz/FIX_PLAN.md`) |
 | `/aif-verify` | Post-implementation quality check | No | No (reads existing) |
 
 ## Workflow Skills
@@ -161,7 +161,7 @@ These skills form the development pipeline. Each one feeds into the next.
 /aif-roadmap check                        # Auto-scan: find completed milestones
 ```
 
-High-level project planning. Creates `.ai-factory/ROADMAP.md` — a strategic checklist of major milestones (not granular tasks). Use `check` to automatically scan the codebase and mark milestones that appear done. `/aif-implement` also checks the roadmap after completing all tasks.
+High-level project planning. Creates `.flz/ROADMAP.md` — a strategic checklist of major milestones (not granular tasks). Use `check` to automatically scan the codebase and mark milestones that appear done. `/aif-implement` also checks the roadmap after completing all tasks.
 
 ### `/aif-plan [fast|full] <description>` — plan the work
 
@@ -172,7 +172,7 @@ High-level project planning. Creates `.ai-factory/ROADMAP.md` — a strategic ch
 /aif-plan full --parallel Add Stripe checkout      # Parallel worktree
 ```
 
-Two modes — **fast** (no branch, saves to `.ai-factory/PLAN.md`) and **full** (creates git branch, asks about testing/logging/docs, saves to `.ai-factory/plans/<branch>.md`). Analyzes requirements, explores codebase for patterns, creates tasks with dependencies. For 5+ tasks, includes commit checkpoints. For parallel work on multiple features, use `full --parallel` to create isolated worktrees.
+Two modes — **fast** (no branch, saves to `.flz/PLAN.md`) and **full** (creates git branch, asks about testing/logging/docs, saves to `.flz/plans/<branch>.md`). Analyzes requirements, explores codebase for patterns, creates tasks with dependencies. For 5+ tasks, includes commit checkpoints. For parallel work on multiple features, use `full --parallel` to create isolated worktrees.
 
 ### `/aif-improve [prompt]` — refine the plan
 
@@ -191,7 +191,7 @@ Second-pass analysis. Finds missing tasks (migrations, configs, middleware), fix
 /aif-implement status # Check progress
 ```
 
-Reads past patches from `.ai-factory/patches/` to learn from previous mistakes, then executes tasks one by one with commit checkpoints. If the plan has `Docs: yes`, runs `/aif-docs` after completion.
+Reads past patches from `.flz/patches/` to learn from previous mistakes, then executes tasks one by one with commit checkpoints. If the plan has `Docs: yes`, runs `/aif-docs` after completion.
 
 ### `/aif-verify [--strict]` — check completeness
 
@@ -210,14 +210,14 @@ Optional step after `/aif-implement`. Goes through every task in the plan and ve
 
 Two modes — choose when you invoke:
 - **Fix now** — investigates and fixes immediately with logging
-- **Plan first** — creates `.ai-factory/FIX_PLAN.md` with analysis and fix steps, then stops for review
+- **Plan first** — creates `.flz/FIX_PLAN.md` with analysis and fix steps, then stops for review
 
 When a plan exists, run without arguments to execute:
 ```
 /aif-fix    # reads FIX_PLAN.md → applies fix → deletes plan
 ```
 
-Every fix creates a **self-improvement patch** in `.ai-factory/patches/`. Every patch makes future `/aif-implement` and `/aif-fix` smarter.
+Every fix creates a **self-improvement patch** in `.flz/patches/`. Every patch makes future `/aif-implement` and `/aif-fix` smarter.
 
 ### `/aif-evolve` — improve skills from experience
 

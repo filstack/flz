@@ -1,6 +1,6 @@
 ---
 name: aif-architecture
-description: Generate architecture guidelines for the project. Analyzes tech stack from DESCRIPTION.md, recommends an architecture pattern, and creates .ai-factory/ARCHITECTURE.md. Use when setting up project architecture, asking "which architecture", or after /aif setup.
+description: Generate architecture guidelines for the project. Analyzes tech stack from DESCRIPTION.md, recommends an architecture pattern, and creates .flz/ARCHITECTURE.md. Use when setting up project architecture, asking "which architecture", or after /aif setup.
 argument-hint: "[clean|ddd|microservices|monolith|layers]"
 allowed-tools: Read Write Glob Grep Bash(mkdir *) AskUserQuestion Questions
 disable-model-invocation: true
@@ -8,19 +8,19 @@ disable-model-invocation: true
 
 # Architecture - Generate Architecture Guidelines
 
-Generate `.ai-factory/ARCHITECTURE.md` with architecture decisions tailored to the project.
+Generate `.flz/ARCHITECTURE.md` with architecture decisions tailored to the project.
 
 ## Workflow
 
 ### Step 0: Load Project Context
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database, ORM)
 - Project size and complexity
 - Core features and requirements
 - Non-functional requirements
 
-**If `.ai-factory/DESCRIPTION.md` does not exist:**
+**If `.flz/DESCRIPTION.md` does not exist:**
 ```
 ⚠️  No project description found.
 
@@ -65,13 +65,13 @@ Architecture options:
 - **Modular Monolith** — single deployment with strong module boundaries, good default for most projects
 - **Layered Architecture** — simple layers (presentation → business → data), good for smaller projects
 
-### Step 2: Generate .ai-factory/ARCHITECTURE.md
+### Step 2: Generate .flz/ARCHITECTURE.md
 
 ```bash
-mkdir -p .ai-factory
+mkdir -p .flz
 ```
 
-Generate `.ai-factory/ARCHITECTURE.md` with the following structure, **adapted to the project's tech stack and language**:
+Generate `.flz/ARCHITECTURE.md` with the following structure, **adapted to the project's tech stack and language**:
 
 ```markdown
 # Architecture: [Pattern Name]
@@ -131,20 +131,20 @@ Generate `.ai-factory/ARCHITECTURE.md` with the following structure, **adapted t
 
 ### Step 3: Update DESCRIPTION.md
 
-If `.ai-factory/DESCRIPTION.md` exists, add an `## Architecture` section (or update if it already exists):
+If `.flz/DESCRIPTION.md` exists, add an `## Architecture` section (or update if it already exists):
 
 ```markdown
 ## Architecture
-See `.ai-factory/ARCHITECTURE.md` for detailed architecture guidelines.
+See `.flz/ARCHITECTURE.md` for detailed architecture guidelines.
 Pattern: [chosen pattern name]
 ```
 
 ### Step 4: Update AGENTS.md
 
-If `AGENTS.md` exists in the project root, add `.ai-factory/ARCHITECTURE.md` to the "AI Context Files" table:
+If `AGENTS.md` exists in the project root, add `.flz/ARCHITECTURE.md` to the "AI Context Files" table:
 
 ```markdown
-| .ai-factory/ARCHITECTURE.md | Architecture decisions and guidelines |
+| .flz/ARCHITECTURE.md | Architecture decisions and guidelines |
 ```
 
 Only add if not already present.
@@ -155,7 +155,7 @@ Only add if not already present.
 ✅ Architecture document generated!
 
 Pattern: [chosen pattern]
-File: .ai-factory/ARCHITECTURE.md
+File: .flz/ARCHITECTURE.md
 
 Key rules:
 - [rule 1]

@@ -5,7 +5,7 @@ argument-hint: "[github|gitlab] [--enhance]"
 allowed-tools: Read Edit Glob Grep Write Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: ci
 ---
@@ -29,7 +29,7 @@ Analyze a project and generate production-grade CI/CD pipeline configuration for
 Read the project description if available:
 
 ```
-Read .ai-factory/DESCRIPTION.md
+Read .flz/DESCRIPTION.md
 ```
 
 Store project context for later steps. If absent, Step 2 detects everything.

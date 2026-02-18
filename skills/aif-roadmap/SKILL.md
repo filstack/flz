@@ -1,6 +1,6 @@
 ---
 name: aif-roadmap
-description: Create or update a project roadmap with major milestones. Generates .ai-factory/ROADMAP.md — a strategic checklist of high-level goals. Use when user says "roadmap", "project plan", "milestones", or "what to build next".
+description: Create or update a project roadmap with major milestones. Generates .flz/ROADMAP.md — a strategic checklist of high-level goals. Use when user says "roadmap", "project plan", "milestones", or "what to build next".
 argument-hint: "[check | project vision or requirements]"
 allowed-tools: Read Write Edit Glob Grep Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
@@ -14,12 +14,12 @@ Create and maintain a high-level project roadmap with major milestones.
 
 ### Step 0: Load Project Context
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database, ORM)
 - Project architecture and conventions
 - Non-functional requirements
 
-**Read `.ai-factory/ARCHITECTURE.md`** if it exists to understand:
+**Read `.flz/ARCHITECTURE.md`** if it exists to understand:
 - Chosen architecture pattern and folder structure
 - Module boundaries and communication patterns
 
@@ -27,7 +27,7 @@ Create and maintain a high-level project roadmap with major milestones.
 
 If argument is `check` → Mode 3: Check Progress (requires ROADMAP.md)
 
-Otherwise check if `.ai-factory/ROADMAP.md` exists:
+Otherwise check if `.flz/ROADMAP.md` exists:
 - **Does NOT exist** → Mode 1: Create Roadmap
 - **Exists** → Mode 2: Update Roadmap
 
@@ -72,7 +72,7 @@ Scan the project to understand what's already built:
 
 **1.3: Generate ROADMAP.md**
 
-Create `.ai-factory/ROADMAP.md` with this format:
+Create `.flz/ROADMAP.md` with this format:
 
 ```markdown
 # Project Roadmap
@@ -113,7 +113,7 @@ Options:
 4. Rewrite — let me give better input
 ```
 
-Apply changes if requested, then save to `.ai-factory/ROADMAP.md`.
+Apply changes if requested, then save to `.flz/ROADMAP.md`.
 
 ---
 
@@ -121,8 +121,8 @@ Apply changes if requested, then save to `.ai-factory/ROADMAP.md`.
 
 **2.1: Read Current State**
 
-- Read `.ai-factory/ROADMAP.md`
-- Read `.ai-factory/DESCRIPTION.md` for context
+- Read `.flz/ROADMAP.md`
+- Read `.flz/DESCRIPTION.md` for context
 - Explore codebase briefly to check what's changed since last update
 
 **2.2: Determine Action**
@@ -165,17 +165,17 @@ If confirmed:
 
 - Ask user to describe new milestones
 - Insert them in logical order among existing milestones
-- Update `.ai-factory/ROADMAP.md`
+- Update `.flz/ROADMAP.md`
 
 **2.5: Reprioritize (if chosen)**
 
 - Show current order
 - Ask user for new order or let them describe priority changes
-- Reorder milestones in `.ai-factory/ROADMAP.md`
+- Reorder milestones in `.flz/ROADMAP.md`
 
 **2.6: Save Changes**
 
-Update `.ai-factory/ROADMAP.md` with all modifications.
+Update `.flz/ROADMAP.md` with all modifications.
 
 Show summary:
 ```
@@ -196,12 +196,12 @@ To start working on the next milestone:
 
 Automated scan — analyze the codebase and mark completed milestones without interactive questions.
 
-**Requires** `.ai-factory/ROADMAP.md` to exist. If it doesn't — tell the user to run `/aif-roadmap` first.
+**Requires** `.flz/ROADMAP.md` to exist. If it doesn't — tell the user to run `/aif-roadmap` first.
 
 **3.1: Read roadmap and project context**
 
-- Read `.ai-factory/ROADMAP.md`
-- Read `.ai-factory/DESCRIPTION.md` for tech stack context
+- Read `.flz/ROADMAP.md`
+- Read `.flz/DESCRIPTION.md` for tech stack context
 
 **3.2: Analyze each unchecked milestone**
 

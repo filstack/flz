@@ -1,12 +1,12 @@
-# AI Factory - Developer Guide
+# FLZ - Developer Guide
 
 > This file is for AI agents working on this codebase. Read this first when starting a new session.
 
 ## What is this project?
 
-**AI Factory** (v2) is an npm package + skill system that automates AI agent context setup for projects. It provides:
+**FLZ** (v2) is an npm package + skill system that automates AI agent context setup for projects. It provides:
 
-1. **CLI tool** (`ai-factory init/update/upgrade`) — installs skills and configures MCP
+1. **CLI tool** (`flz init/update/upgrade`) — installs skills and configures MCP
 2. **Built-in skills** (19 skills, all `aif-*` prefixed) — workflow commands for spec-driven development
 3. **Spec-driven workflow** — structured approach: plan → implement → commit
 4. **Multi-agent support** — 14 agents (Claude Code, Cursor, Windsurf, Roo Code, Kilo Code, Antigravity, OpenCode, Warp, Zencoder, Codex CLI, GitHub Copilot, Gemini CLI, Junie, Universal)
@@ -14,7 +14,7 @@
 ## Project Structure
 
 ```
-ai-factory/
+flz/
 ├── src/                    # CLI source (TypeScript)
 │   ├── cli/
 │   │   ├── commands/       # init.ts, update.ts, upgrade.ts
@@ -58,11 +58,11 @@ ai-factory/
 - **Agent transformer system**: `src/core/transformers/` adapts skill format per agent (e.g. Antigravity uses flat `.md` for workflow skills, KiloCode sanitizes dotted names)
 
 ### Working Directory
-All AI Factory files in user projects go to `.ai-factory/`:
-- `.ai-factory/DESCRIPTION.md` — project specification
-- `.ai-factory/ARCHITECTURE.md` — architecture decisions and guidelines
-- `.ai-factory/PLAN.md` — task plan (from /aif-plan fast)
-- `.ai-factory/plans/<branch>.md` — plans (from /aif-plan full)
+All FLZ files in user projects go to `.flz/`:
+- `.flz/DESCRIPTION.md` — project specification
+- `.flz/ARCHITECTURE.md` — architecture decisions and guidelines
+- `.flz/PLAN.md` — task plan (from /aif-plan fast)
+- `.flz/plans/<branch>.md` — plans (from /aif-plan full)
 
 ### Skill Naming (v2)
 All skills use `aif-` prefix (v1 used bare names like `commit`, `feature`):
@@ -75,7 +75,7 @@ All skills use `aif-` prefix (v1 used bare names like `commit`, `feature`):
 - `/aif-docs`
 - etc.
 
-The `ai-factory upgrade` command migrates from v1 bare names to v2 prefixed names.
+The `flz upgrade` command migrates from v1 bare names to v2 prefixed names.
 
 ## Workflow Logic
 
@@ -101,20 +101,20 @@ STOP (does NOT implement)
 
 /aif-roadmap [vision or requirements]
     ↓
-Reads .ai-factory/DESCRIPTION.md + ARCHITECTURE.md for context
+Reads .flz/DESCRIPTION.md + ARCHITECTURE.md for context
     ↓
-First run → explores codebase, asks user for goals → generates .ai-factory/ROADMAP.md
+First run → explores codebase, asks user for goals → generates .flz/ROADMAP.md
 Subsequent → review progress, add/reprioritize/mark milestones done
     ↓
 ROADMAP.md = strategic checklist of high-level goals
 
 /aif-plan [fast|full] <description>
     ↓
-Reads .ai-factory/DESCRIPTION.md + ARCHITECTURE.md for context
+Reads .flz/DESCRIPTION.md + ARCHITECTURE.md for context
     ↓
-fast → no branch, saves to .ai-factory/PLAN.md
+fast → no branch, saves to .flz/PLAN.md
 full → creates git branch, asks: tests? logging? docs?
-       saves to .ai-factory/plans/<branch>.md
+       saves to .flz/plans/<branch>.md
     ↓
 Explores codebase
     ↓
@@ -124,7 +124,7 @@ For 5+ tasks: includes commit checkpoints
 
 /aif-implement
     ↓
-Reads .ai-factory/DESCRIPTION.md + ARCHITECTURE.md for context
+Reads .flz/DESCRIPTION.md + ARCHITECTURE.md for context
     ↓
 Finds plan file (PLAN.md or branch-named)
     ↓
@@ -134,13 +134,13 @@ Updates DESCRIPTION.md if stack changes
     ↓
 Prompts for commits at checkpoints
     ↓
-Checks .ai-factory/ROADMAP.md → marks completed milestones
+Checks .flz/ROADMAP.md → marks completed milestones
     ↓
 Offers to delete PLAN.md when done (keeps feature-*.md)
 
 /aif-fix <bug description>
     ↓
-Reads .ai-factory/DESCRIPTION.md + patches for context
+Reads .flz/DESCRIPTION.md + patches for context
     ↓
 Investigates codebase (Glob, Grep, Read)
     ↓
@@ -148,13 +148,13 @@ Implements fix WITH logging ([FIX] prefix)
     ↓
 Suggests test coverage for the bug
     ↓
-Creates self-improvement patch in .ai-factory/patches/
+Creates self-improvement patch in .flz/patches/
     ↓
 NO plans, NO reports
 
 /aif-evolve [skill-name|"all"]
     ↓
-Reads .ai-factory/DESCRIPTION.md + all patches
+Reads .flz/DESCRIPTION.md + all patches
     ↓
 Analyzes recurring patterns and tech-specific pitfalls
     ↓
@@ -164,7 +164,7 @@ Proposes targeted improvements → user approves
     ↓
 Applies improvements to skills
     ↓
-Saves evolution log to .ai-factory/evolutions/
+Saves evolution log to .flz/evolutions/
 ```
 
 ## Skill Frontmatter Patterns
@@ -197,13 +197,13 @@ npm link
 
 # Test in a project
 cd /some/project
-ai-factory init
+flz init
 
 # Update skills after changes
-ai-factory update
+flz update
 
 # Upgrade from v1 to v2 (removes old bare-named skills, installs aif-* prefixed)
-ai-factory upgrade
+flz upgrade
 ```
 
 ## Key Files to Know
@@ -229,7 +229,7 @@ ai-factory upgrade
 
 1. **Skills don't implement** - `/aif` only sets up context
 2. **DESCRIPTION.md is source of truth** - all skills read it for context
-3. **Plans go to .ai-factory/** - keeps project root clean
+3. **Plans go to .flz/** - keeps project root clean
 4. **Search skills.sh first** - don't reinvent existing skills
 5. **Verbose logging required** - all implementations must have configurable logging
 6. **No tests unless asked** - respect user's testing preference
@@ -243,12 +243,12 @@ User-facing documentation is split between a lean README and detailed `docs/` pa
 ```
 README.md                    # Landing page (~105 lines) — first impression, install, example workflow
 docs/
-├── getting-started.md       # What is AI Factory, supported agents table, first project walkthrough, CLI
+├── getting-started.md       # What is FLZ, supported agents table, first project walkthrough, CLI
 ├── workflow.md              # Workflow diagram, "When to Use What" table, workflow skills overview
 ├── skills.md                # Full reference: Workflow Skills + Utility Skills
 ├── plan-files.md            # Plan files, self-improvement patches, skill acquisition strategy
 ├── security.md              # Two-level security scanning system
-└── configuration.md         # .ai-factory.json, MCP config, project structure, best practices
+└── configuration.md         # .flz.json, MCP config, project structure, best practices
 ```
 
 ### Principles
@@ -284,7 +284,7 @@ docs/
 ### Modifying workflow
 1. Edit relevant skill in `skills/`
 2. Update AGENTS.md if logic changes
-3. Rebuild and test with `ai-factory update`
+3. Rebuild and test with `flz update`
 4. Validate: `npm test`
 
 ### Adding a new agent
@@ -312,14 +312,14 @@ To add support for a new AI coding agent:
 
 3. **Documentation** — update:
    - `docs/getting-started.md` — Supported Agents table
-   - `docs/configuration.md` — MCP support mention (if applicable), agent IDs/entries in `.ai-factory.json` docs
+   - `docs/configuration.md` — MCP support mention (if applicable), agent IDs/entries in `.flz.json` docs
    - `README.md` — agent name in "Multi-agent support" bullet, Links section
 
 4. **`AGENTS.md`** — update Skills Location example if helpful
 
 5. **`package.json`** — add agent name to `keywords`
 
-6. **Build & test**: `npm run build && ai-factory init` — select the new agent, verify skills copy to correct dir and MCP config (if any) writes correct format
+6. **Build & test**: `npm run build && flz init` — select the new agent, verify skills copy to correct dir and MCP config (if any) writes correct format
 
 Template variables (`{{config_dir}}`, `{{skills_dir}}`, etc.) in skill `.md` files are substituted automatically by `src/core/template.ts` — no changes needed there.
 
@@ -345,10 +345,10 @@ Runs `scripts/test-skills.sh` which validates:
 
 After changes, verify:
 - [ ] `npm test` passes
-- [ ] `ai-factory init` works in empty directory
-- [ ] `ai-factory update` updates existing skills
-- [ ] `ai-factory upgrade` migrates v1 → v2 correctly
+- [ ] `flz init` works in empty directory
+- [ ] `flz update` updates existing skills
+- [ ] `flz upgrade` migrates v1 → v2 correctly
 - [ ] `/aif` in Claude Code shows interactive stack selection
 - [ ] `/aif-plan` creates branch + plan file
 - [ ] `/aif-implement` finds and executes plan
-- [ ] Skills read `.ai-factory/DESCRIPTION.md`
+- [ ] Skills read `.flz/DESCRIPTION.md`

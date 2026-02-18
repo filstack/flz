@@ -9,20 +9,20 @@ disable-model-invocation: false
 # Plan - Implementation Planning
 
 Create an implementation plan for a feature or task. Two modes:
-- **Fast** — quick plan, no git branch, saves to `.ai-factory/PLAN.md`
-- **Full** — creates git branch, asks preferences, saves to `.ai-factory/plans/<branch>.md`
+- **Fast** — quick plan, no git branch, saves to `.flz/PLAN.md`
+- **Full** — creates git branch, asks preferences, saves to `.flz/plans/<branch>.md`
 
 ## Workflow
 
 ### Step 0: Load Project Context
 
-**FIRST:** Read `.ai-factory/DESCRIPTION.md` if it exists to understand:
+**FIRST:** Read `.flz/DESCRIPTION.md` if it exists to understand:
 - Tech stack (language, framework, database, ORM)
 - Project architecture
 - Coding conventions
 - Non-functional requirements
 
-**ALSO:** Read `.ai-factory/ARCHITECTURE.md` if it exists to understand:
+**ALSO:** Read `.flz/ARCHITECTURE.md` if it exists to understand:
 - Chosen architecture pattern
 - Folder structure conventions
 - Layer/module boundaries
@@ -32,7 +32,7 @@ Use this context when:
 - Exploring codebase (know what patterns to look for)
 - Writing task descriptions (use correct technologies)
 - Planning file structure (follow project conventions)
-- **Follow architecture guidelines from `.ai-factory/ARCHITECTURE.md` when planning file structure and task organization**
+- **Follow architecture guidelines from `.flz/ARCHITECTURE.md` when planning file structure and task organization**
 
 ### Step 0.1: Ensure Git Repository
 
@@ -119,7 +119,7 @@ Task(subagent_type: Explore, model: sonnet, prompt:
 **Rules:**
 - 1-2 agents max, "quick" thoroughness — this is reconnaissance, not deep analysis
 - Deep exploration happens later in Step 3
-- If `.ai-factory/DESCRIPTION.md` already provides sufficient context, this step can be skipped
+- If `.flz/DESCRIPTION.md` already provides sufficient context, this step can be skipped
 
 ### Step 1.2: Generate Branch Name
 
@@ -196,11 +196,11 @@ Copy context files so the worktree has full AI context:
 WORKTREE="../${DIRNAME}-<branch-name-with-hyphens>"
 
 # Project context
-cp .ai-factory/DESCRIPTION.md "${WORKTREE}/.ai-factory/DESCRIPTION.md" 2>/dev/null
-cp .ai-factory/ARCHITECTURE.md "${WORKTREE}/.ai-factory/ARCHITECTURE.md" 2>/dev/null
+cp .flz/DESCRIPTION.md "${WORKTREE}/.flz/DESCRIPTION.md" 2>/dev/null
+cp .flz/ARCHITECTURE.md "${WORKTREE}/.flz/ARCHITECTURE.md" 2>/dev/null
 
 # Past lessons / patches
-cp -r .ai-factory/patches/ "${WORKTREE}/.ai-factory/patches/" 2>/dev/null
+cp -r .flz/patches/ "${WORKTREE}/.flz/patches/" 2>/dev/null
 
 # Claude Code skills + settings
 cp -r .claude/ "${WORKTREE}/.claude/" 2>/dev/null
@@ -214,7 +214,7 @@ fi
 Create changes directory and switch:
 
 ```bash
-mkdir -p "${WORKTREE}/.ai-factory/plans"
+mkdir -p "${WORKTREE}/.flz/plans"
 cd "${WORKTREE}"
 ```
 
@@ -263,7 +263,7 @@ AskUserQuestion: Before we start:
 2. Any specific requirements or constraints?
 ```
 
-**Plan file:** Always `.ai-factory/PLAN.md` (no branch, no branch-named file).
+**Plan file:** Always `.flz/PLAN.md` (no branch, no branch-named file).
 
 ---
 
@@ -337,12 +337,12 @@ Use `TaskUpdate` to set `blockedBy` relationships:
 ### Step 5: Save Plan to File
 
 **Determine plan file path:**
-- **Fast mode** → `.ai-factory/PLAN.md`
-- **Full mode** → `.ai-factory/plans/<branch-name>.md` (replace `/` with `-`)
+- **Fast mode** → `.flz/PLAN.md`
+- **Full mode** → `.flz/plans/<branch-name>.md` (replace `/` with `-`)
 
 **Before saving, ensure directory exists:**
 ```bash
-mkdir -p .ai-factory/plans  # only when saving to branch-named plan files
+mkdir -p .flz/plans  # only when saving to branch-named plan files
 ```
 
 **Plan file format:**
@@ -393,7 +393,7 @@ Created: [date]
 /aif-implement
 
 CONTEXT FROM /aif-plan:
-- Plan file: .ai-factory/plans/<branch-name>.md
+- Plan file: .flz/plans/<branch-name>.md
 - Testing: yes/no
 - Logging: verbose/standard/minimal
 - Docs: yes/no
@@ -403,7 +403,7 @@ CONTEXT FROM /aif-plan:
 
 ```
 Plan created with [N] tasks.
-Plan file: .ai-factory/plans/<branch-name>.md
+Plan file: .flz/plans/<branch-name>.md
 
 To start implementation, run:
 /aif-implement
@@ -416,7 +416,7 @@ To view tasks:
 
 ```
 Plan created with [N] tasks.
-Plan file: .ai-factory/PLAN.md
+Plan file: .flz/PLAN.md
 
 To start implementation, run:
 /aif-implement
@@ -449,7 +449,7 @@ git worktree list
 ```
 
 For each worktree path:
-1. Check if `<worktree>/.ai-factory/plans/` contains any plan files
+1. Check if `<worktree>/.flz/plans/` contains any plan files
 2. Show name and whether it looks complete (has tasks) or is still in progress
 
 **Output format:**
@@ -535,16 +535,16 @@ Task descriptions should specify that logs must be:
 5. **Dependencies matter** — Order tasks so they can be done sequentially
 6. **Include file paths** — Help implementer know where to work
 7. **Commit checkpoints for large plans** — 5+ tasks need commit plan with checkpoints every 3-5 tasks
-8. **Plan file location** — Fast mode: `.ai-factory/PLAN.md`. Full mode: `.ai-factory/plans/<branch-name>.md`
+8. **Plan file location** — Fast mode: `.flz/PLAN.md`. Full mode: `.flz/plans/<branch-name>.md`
 
 ## Plan File Handling
 
-**`.ai-factory/PLAN.md`** (fast mode):
+**`.flz/PLAN.md`** (fast mode):
 - Temporary plan for quick tasks
 - After completion, `/aif-implement` will ask to delete it
 - Not tied to any branch
 
-**Branch-named file** (full mode, e.g., `.ai-factory/plans/feature-user-auth.md`):
+**Branch-named file** (full mode, e.g., `.flz/plans/feature-user-auth.md`):
 - Permanent documentation of feature work
 - `/aif-implement` will NOT suggest deletion
 - User decides whether to keep or delete before merge
@@ -552,7 +552,7 @@ Task descriptions should specify that logs must be:
 The plan file allows resuming work based on current git branch:
 ```bash
 git branch --show-current  # -> feature/user-authentication
-# -> Look for .ai-factory/plans/feature-user-authentication.md
+# -> Look for .flz/plans/feature-user-authentication.md
 ```
 
 ## Examples
@@ -566,7 +566,7 @@ git branch --show-current  # -> feature/user-authentication
 -> Asks about tests (No)
 -> Explores codebase
 -> Creates 4 tasks
--> Saves plan to .ai-factory/PLAN.md
+-> Saves plan to .flz/PLAN.md
 -> STOP
 ```
 
@@ -582,7 +582,7 @@ git branch --show-current  # -> feature/user-authentication
 -> Creates branch
 -> Explores codebase deeply
 -> Creates 8 tasks with commit checkpoints
--> Saves plan to .ai-factory/plans/feature-user-authentication.md
+-> Saves plan to .flz/plans/feature-user-authentication.md
 -> STOP — user runs /aif-implement when ready
 ```
 
@@ -599,7 +599,7 @@ git branch --show-current  # -> feature/user-authentication
 -> Copies context files, cd into worktree
 -> Explores codebase deeply
 -> Creates 6 tasks
--> Saves plan to .ai-factory/plans/feature-stripe-checkout.md
+-> Saves plan to .flz/plans/feature-stripe-checkout.md
 -> Auto-invokes /aif-implement (parallel = autonomous)
 ```
 

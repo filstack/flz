@@ -18,7 +18,7 @@ Execute tasks from the plan, track progress, and enable session continuation.
 
 ```
 1. Check for uncommitted changes (git status)
-2. Check for plan files (.ai-factory/PLAN.md or branch-named)
+2. Check for plan files (.flz/PLAN.md or branch-named)
 3. Check current branch
 ```
 
@@ -53,24 +53,24 @@ Based on choice:
 
 ### Step 0.1: Load Project Context & Past Experience
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database, ORM)
 - Project architecture and conventions
 - Non-functional requirements
 
-**Read `.ai-factory/ARCHITECTURE.md`** if it exists to understand:
+**Read `.flz/ARCHITECTURE.md`** if it exists to understand:
 - Chosen architecture pattern and folder structure
 - Dependency rules (what depends on what)
 - Layer/module boundaries and communication patterns
 - Follow these conventions when implementing — file placement, imports, module boundaries
 
-**Read `.ai-factory/RULES.md`** if it exists:
+**Read `.flz/RULES.md`** if it exists:
 - These are project-specific rules and conventions added by the user
 - **ALWAYS follow these rules** when implementing — they override general patterns
 - Rules are short, actionable — treat each as a hard requirement
 
-**Read all patches from `.ai-factory/patches/`** if the directory exists:
-- Use `Glob` to find all `*.md` files in `.ai-factory/patches/`
+**Read all patches from `.flz/patches/`** if the directory exists:
+- Use `Glob` to find all `*.md` files in `.flz/patches/`
 - Read each patch to learn from past fixes and mistakes
 - Apply lessons learned: avoid patterns that caused bugs, use patterns that prevented them
 - Pay attention to **Root Cause** and **Prevention** sections — they tell you what NOT to do
@@ -86,15 +86,15 @@ Based on choice:
 **Check for plan files in this order:**
 
 ```
-1. .ai-factory/PLAN.md exists? → Use it (from /aif-plan fast)
-2. No .ai-factory/PLAN.md → Check current git branch:
+1. .flz/PLAN.md exists? → Use it (from /aif-plan fast)
+2. No .flz/PLAN.md → Check current git branch:
    git branch --show-current
-   → Look for .ai-factory/plans/<branch-name>.md (e.g., .ai-factory/plans/feature-user-auth.md)
+   → Look for .flz/plans/<branch-name>.md (e.g., .flz/plans/feature-user-auth.md)
 ```
 
 **Priority:**
-1. `.ai-factory/PLAN.md` - always takes priority (from `/aif-plan fast`)
-2. Branch-named file - if no .ai-factory/PLAN.md (from `/aif-plan full`)
+1. `.flz/PLAN.md` - always takes priority (from `/aif-plan fast`)
+2. Branch-named file - if no .flz/PLAN.md (from `/aif-plan full`)
 
 **Read the plan file** to understand:
 - Context and settings (testing, logging preferences)
@@ -172,7 +172,7 @@ TaskUpdate(taskId, status: "completed")
 - Even if deletion will be offered later
 - Plan file is the source of truth for progress
 
-**3.7: Update .ai-factory/DESCRIPTION.md if needed**
+**3.7: Update .flz/DESCRIPTION.md if needed**
 
 If during implementation:
 - New dependency/library was added
@@ -180,14 +180,14 @@ If during implementation:
 - New integration added (e.g., Stripe, SendGrid)
 - Architecture decision was made
 
-→ Update `.ai-factory/DESCRIPTION.md` to reflect the change:
+→ Update `.flz/DESCRIPTION.md` to reflect the change:
 
 ```markdown
 ## Tech Stack
 - **Cache:** Redis (added for session storage)
 ```
 
-This keeps .ai-factory/DESCRIPTION.md as the source of truth.
+This keeps .flz/DESCRIPTION.md as the source of truth.
 
 **3.7.1: Update AGENTS.md and ARCHITECTURE.md if project structure changed**
 
@@ -198,7 +198,7 @@ If during implementation:
 
 → Update `AGENTS.md` — refresh the "Project Structure" tree and "Key Entry Points" table to reflect new directories/files.
 
-→ Update `.ai-factory/ARCHITECTURE.md` — if new modules or layers were added that should be documented in the folder structure section.
+→ Update `.flz/ARCHITECTURE.md` — if new modules or layers were added that should be documented in the folder structure section.
 
 **Only update if structure actually changed** — don't rewrite on every task. Check if new directories were created that aren't in the current structure map.
 
@@ -249,7 +249,7 @@ When all tasks are done:
 All 8 tasks completed.
 
 Branch: feature/product-search
-Plan file: .ai-factory/plans/feature-product-search.md
+Plan file: .flz/plans/feature-product-search.md
 Files modified:
 - src/services/search.ts (created)
 - src/api/products/search.ts (created)
@@ -263,7 +263,7 @@ What's next?
 
 **Check ROADMAP.md progress:**
 
-If `.ai-factory/ROADMAP.md` exists:
+If `.flz/ROADMAP.md` exists:
 1. Read it
 2. Check if the completed work corresponds to any unchecked milestone
 3. If yes — mark it `[x]` and add entry to the Completed table with today's date
@@ -309,14 +309,14 @@ If documentation preference is "yes":
 
 **Handle plan file after completion:**
 
-- **If `.ai-factory/PLAN.md`** (from `/aif-plan fast`):
+- **If `.flz/PLAN.md`** (from `/aif-plan fast`):
   ```
-  Would you like to delete .ai-factory/PLAN.md? (It's no longer needed)
+  Would you like to delete .flz/PLAN.md? (It's no longer needed)
   - [ ] Yes, delete it
   - [ ] No, keep it
   ```
 
-- **If branch-named file** (e.g., `.ai-factory/plans/feature-user-auth.md`):
+- **If branch-named file** (e.g., `.flz/plans/feature-user-auth.md`):
   - Keep it - documents what was done
   - User can delete before merging if desired
 
@@ -438,7 +438,7 @@ Shows progress without executing.
 - ❌ Add tasks not in the plan
 - ❌ Skip tasks without user permission
 - ❌ Mark incomplete tasks as done
-- ❌ Violate `.ai-factory/ARCHITECTURE.md` conventions for file placement and module boundaries
+- ❌ Violate `.flz/ARCHITECTURE.md` conventions for file placement and module boundaries
 
 For progress display format, blocker handling, session continuity examples, and full flow examples → see `references/IMPLEMENTATION-GUIDE.md`
 

@@ -1,12 +1,12 @@
 {
-  "name": "ai-factory",
+  "name": "flz",
   "version": "2.0.0",
   "type": "module",
   "description": "CLI tool for automating AI agent context setup in projects",
   "main": "dist/cli/index.js",
   "types": "dist/cli/index.d.ts",
   "bin": {
-    "ai-factory": "./bin/ai-factory.js"
+    "flz": "./bin/flz.js"
   },
   "scripts": {
     "build": "tsc",

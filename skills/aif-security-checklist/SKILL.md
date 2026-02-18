@@ -25,27 +25,27 @@ Comprehensive security checklist based on OWASP Top 10 (2021) and industry best 
 
 ## Ignored Items (SECURITY.md)
 
-Before running any audit, **always read** the file `.ai-factory/SECURITY.md` in the project root. If it exists, it contains a list of security checks the team has decided to ignore.
+Before running any audit, **always read** the file `.flz/SECURITY.md` in the project root. If it exists, it contains a list of security checks the team has decided to ignore.
 
 ### How ignoring works
 
 **When the user runs `/aif-security-checklist ignore <item>`:**
 
-1. Read the current `.ai-factory/SECURITY.md` file (create if doesn't exist)
+1. Read the current `.flz/SECURITY.md` file (create if doesn't exist)
 2. Ask the user for the reason why this item should be ignored
 3. Add the item to the file following the format below
 4. Confirm the item was added
 
 **When running any audit (`/aif-security-checklist` or a specific category):**
 
-1. Read `.ai-factory/SECURITY.md` at the start
+1. Read `.flz/SECURITY.md` at the start
 2. For each ignored item that matches the current audit scope:
    - Do NOT flag it as a finding
    - Instead, show it in a separate section at the end: **"⏭️ Ignored Items"**
    - Display each ignored item with its reason and date, so the team stays aware
 3. Non-ignored items are audited as usual
 
-### `.ai-factory/SECURITY.md` format
+### `.flz/SECURITY.md` format
 
 ```markdown
 # Security: Ignored Items
@@ -77,7 +77,7 @@ Review periodically — ignored risks may become relevant.
 When audit results are shown, append this section at the end:
 
 ```
-⏭️ Ignored Items (from .ai-factory/SECURITY.md)
+⏭️ Ignored Items (from .flz/SECURITY.md)
 ┌─────────────────┬──────────────────────────────────────┬────────────┐
 │ Item            │ Reason                               │ Date       │
 ├─────────────────┼──────────────────────────────────────┼────────────┤

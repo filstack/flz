@@ -9,7 +9,7 @@ allowed-tools: Read Glob Grep
 
 Universal code quality guidelines applicable to any language or framework.
 
-**Context:** If `.ai-factory/ARCHITECTURE.md` exists, follow its folder structure, dependency rules, and module boundaries alongside these guidelines.
+**Context:** If `.flz/ARCHITECTURE.md` exists, follow its folder structure, dependency rules, and module boundaries alongside these guidelines.
 
 ## Quick Reference
 

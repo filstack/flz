@@ -14,16 +14,16 @@ Fix a specific bug or problem in the codebase. Supports two modes: immediate fix
 
 ### Step 0: Check for Existing Fix Plan
 
-**BEFORE anything else**, check if `.ai-factory/FIX_PLAN.md` exists.
+**BEFORE anything else**, check if `.flz/FIX_PLAN.md` exists.
 
 **If the file EXISTS:**
-- Read `.ai-factory/FIX_PLAN.md`
+- Read `.flz/FIX_PLAN.md`
 - Inform the user: "Found existing fix plan. Executing fix based on the plan."
 - **Skip Steps 0.1 through 1** — go directly to **Step 2: Investigate the Codebase**, using the plan as your guide
 - Follow each step of the plan sequentially
-- After the fix is fully applied and verified, **delete** `.ai-factory/FIX_PLAN.md`:
+- After the fix is fully applied and verified, **delete** `.flz/FIX_PLAN.md`:
   ```bash
-  rm .ai-factory/FIX_PLAN.md
+  rm .flz/FIX_PLAN.md
   ```
 - Continue to Step 4 (Verify), Step 5 (Test suggestion), Step 6 (Patch)
 
@@ -36,13 +36,13 @@ Fix a specific bug or problem in the codebase. Supports two modes: immediate fix
 
 ### Step 0.1: Load Project Context & Past Experience
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database)
 - Project architecture
 - Coding conventions
 
-**Read all patches from `.ai-factory/patches/`** if the directory exists:
-- Use `Glob` to find all `*.md` files in `.ai-factory/patches/`
+**Read all patches from `.flz/patches/`** if the directory exists:
+- Use `Glob` to find all `*.md` files in `.flz/patches/`
 - Read each patch file to learn from past fixes
 - Pay attention to recurring patterns, root causes, and solutions
 - If the current problem resembles a past patch — apply the same approach or avoid the same mistakes
@@ -90,7 +90,7 @@ After agents return, synthesize findings to:
 2. Map affected files and functions
 3. Assess impact scope
 
-Then create `.ai-factory/FIX_PLAN.md` with this structure:
+Then create `.flz/FIX_PLAN.md` with this structure:
 
 ```markdown
 # Fix Plan: [Brief title]
@@ -135,7 +135,7 @@ Step-by-step plan for implementing the fix:
 ```
 ## Fix Plan Created ✅
 
-Plan saved to `.ai-factory/FIX_PLAN.md`.
+Plan saved to `.flz/FIX_PLAN.md`.
 
 Review the plan and when you're ready to execute, run:
 
@@ -355,7 +355,7 @@ To add the suggested test:
 
 1. Create directory if it doesn't exist:
    ```bash
-   mkdir -p .ai-factory/patches
+   mkdir -p .flz/patches
    ```
 
 2. Create a patch file with the current timestamp as filename.

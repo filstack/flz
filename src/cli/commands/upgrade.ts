@@ -30,29 +30,29 @@ const OLD_SKILL_NAMES = [
 
 // Old v2 skill directory names before aif-* migration
 const OLD_AIF_PREFIX_SKILL_NAMES = [
-  'ai-factory',
-  'ai-factory-architecture',
-  'ai-factory-best-practices',
-  'ai-factory-build-automation',
-  'ai-factory-ci',
-  'ai-factory-commit',
-  'ai-factory-deploy',
-  'ai-factory-dockerize',
-  'ai-factory-docs',
-  'ai-factory-evolve',
-  'ai-factory-fix',
-  'ai-factory-implement',
-  'ai-factory-improve',
-  'ai-factory-plan',
-  'ai-factory-review',
-  'ai-factory-roadmap',
-  'ai-factory-rules',
-  'ai-factory-security-checklist',
-  'ai-factory-skill-generator',
-  'ai-factory-verify',
+  'flz',
+  'flz-architecture',
+  'flz-best-practices',
+  'flz-build-automation',
+  'flz-ci',
+  'flz-commit',
+  'flz-deploy',
+  'flz-dockerize',
+  'flz-docs',
+  'flz-evolve',
+  'flz-fix',
+  'flz-implement',
+  'flz-improve',
+  'flz-plan',
+  'flz-review',
+  'flz-roadmap',
+  'flz-rules',
+  'flz-security-checklist',
+  'flz-skill-generator',
+  'flz-verify',
   // Transitional names that were removed earlier
-  'ai-factory-task',
-  'ai-factory-feature',
+  'flz-task',
+  'flz-feature',
 ];
 
 // Old workflow skills stored as flat .md files by Antigravity transformer
@@ -70,35 +70,35 @@ const OLD_WORKFLOW_SKILLS = new Set([
 export async function upgradeCommand(): Promise<void> {
   const projectDir = process.cwd();
 
-  console.log(chalk.bold.blue('\n🏭 AI Factory - Upgrade to v2\n'));
+  console.log(chalk.bold.blue('\n🏭 FLZ - Upgrade to v2\n'));
 
   const config = await loadConfig(projectDir);
 
   if (!config) {
-    console.log(chalk.red('Error: No .ai-factory.json found.'));
-    console.log(chalk.dim('Run "ai-factory init" to set up your project first.'));
+    console.log(chalk.red('Error: No .flz.json found.'));
+    console.log(chalk.dim('Run "flz init" to set up your project first.'));
     process.exit(1);
   }
 
   if (config.agents.length === 0) {
-    console.log(chalk.red('Error: No agents configured in .ai-factory.json.'));
-    console.log(chalk.dim('Run "ai-factory init" to configure at least one agent.'));
+    console.log(chalk.red('Error: No agents configured in .flz.json.'));
+    console.log(chalk.dim('Run "flz init" to configure at least one agent.'));
     process.exit(1);
   }
 
-  // Step 1: Migrate legacy plan directories to .ai-factory/plans/
-  const featuresDir = path.join(projectDir, '.ai-factory', 'features');
-  const changesDir = path.join(projectDir, '.ai-factory', 'changes');
-  const plansDir = path.join(projectDir, '.ai-factory', 'plans');
+  // Step 1: Migrate legacy plan directories to .flz/plans/
+  const featuresDir = path.join(projectDir, '.flz', 'features');
+  const changesDir = path.join(projectDir, '.flz', 'changes');
+  const plansDir = path.join(projectDir, '.flz', 'plans');
 
   if (await fileExists(changesDir) && !(await fileExists(plansDir))) {
     await fs.move(changesDir, plansDir);
-    console.log(chalk.green('✓ Renamed .ai-factory/changes/ → .ai-factory/plans/\n'));
+    console.log(chalk.green('✓ Renamed .flz/changes/ → .flz/plans/\n'));
   }
 
   if (await fileExists(featuresDir) && !(await fileExists(plansDir))) {
     await fs.move(featuresDir, plansDir);
-    console.log(chalk.green('✓ Renamed .ai-factory/features/ → .ai-factory/plans/\n'));
+    console.log(chalk.green('✓ Renamed .flz/features/ → .flz/plans/\n'));
   }
 
   const availableSkills = await getAvailableSkills();
@@ -131,10 +131,10 @@ export async function upgradeCommand(): Promise<void> {
       }
     }
 
-    // Remove old aif-task, aif-feature, and ai-factory-* skills
+    // Remove old aif-task, aif-feature, and flz-* skills
     const obsoleteSkills = [
       'aif-task', 'aif-feature',
-      ...OLD_SKILL_NAMES.map(n => `ai-factory-${n}`),
+      ...OLD_SKILL_NAMES.map(n => `flz-${n}`),
       ...OLD_AIF_PREFIX_SKILL_NAMES,
     ];
 

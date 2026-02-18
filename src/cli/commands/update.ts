@@ -5,13 +5,13 @@ import { updateSkills, getAvailableSkills } from '../../core/installer.js';
 export async function updateCommand(): Promise<void> {
   const projectDir = process.cwd();
 
-  console.log(chalk.bold.blue('\n🏭 AI Factory - Update Skills\n'));
+  console.log(chalk.bold.blue('\n🏭 FLZ - Update Skills\n'));
 
   const config = await loadConfig(projectDir);
 
   if (!config) {
-    console.log(chalk.red('Error: No .ai-factory.json found.'));
-    console.log(chalk.dim('Run "ai-factory init" to set up your project first.'));
+    console.log(chalk.red('Error: No .flz.json found.'));
+    console.log(chalk.dim('Run "flz init" to set up your project first.'));
     process.exit(1);
   }
 

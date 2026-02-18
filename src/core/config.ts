@@ -33,7 +33,7 @@ interface LegacyAiFactoryConfig {
   mcp?: Partial<McpConfig>;
 }
 
-const CONFIG_FILENAME = '.ai-factory.json';
+const CONFIG_FILENAME = '.flz.json';
 const CURRENT_VERSION: string = pkg.version;
 
 export function getConfigPath(projectDir: string): string {

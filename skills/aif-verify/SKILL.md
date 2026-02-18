@@ -8,7 +8,7 @@ argument-hint: "[--strict]"
 allowed-tools: Read Edit Glob Grep Bash(git *) Bash(npm *) Bash(npx *) Bash(yarn *) Bash(pnpm *) Bash(bun *) Bash(go *) Bash(python *) Bash(php *) Bash(composer *) Bash(cargo *) Bash(make *) Bash(task *) Bash(just *) Bash(mage *) TaskList TaskGet AskUserQuestion Questions
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: quality
 ---
@@ -28,10 +28,10 @@ Verify that the completed implementation matches the plan, nothing was missed, a
 Same logic as `/aif-implement`:
 
 ```
-1. .ai-factory/PLAN.md exists? → Use it
+1. .flz/PLAN.md exists? → Use it
 2. No PLAN.md → Check current git branch:
    git branch --show-current
-   → Look for .ai-factory/plans/<branch-name>.md
+   → Look for .flz/plans/<branch-name>.md
 ```
 
 If no plan file found:
@@ -48,7 +48,7 @@ Options:
 
 - Read the plan file to understand what was supposed to be implemented
 - `TaskList` → get all tasks and their statuses
-- Read `.ai-factory/DESCRIPTION.md` for project context (tech stack, conventions)
+- Read `.flz/DESCRIPTION.md` for project context (tech stack, conventions)
 
 ### 0.3 Gather Changed Files
 
@@ -200,7 +200,7 @@ Cross-reference with `.env.example`, `.env.local`, README, or docs to ensure the
 
 ### 3.4 DESCRIPTION.md Sync
 
-Check if `.ai-factory/DESCRIPTION.md` reflects the current state:
+Check if `.flz/DESCRIPTION.md` reflects the current state:
 
 - New dependencies/libraries added during implementation → should be listed
 - Architecture changes → should be reflected

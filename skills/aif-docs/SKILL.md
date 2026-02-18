@@ -5,7 +5,7 @@ argument-hint: "[--web]"
 allowed-tools: Read Write Edit Glob Grep Bash(mkdir, npx, python) AskUserQuestion Questions WebFetch WebSearch
 disable-model-invocation: true
 metadata:
-  author: AI Factory
+  author: FLZ
   version: "1.0"
   category: documentation
 ---
@@ -27,7 +27,7 @@ Generate, maintain, and improve project documentation following a landing-page R
 
 ### Step 0: Load Project Context
 
-**Read `.ai-factory/DESCRIPTION.md`** if it exists to understand:
+**Read `.flz/DESCRIPTION.md`** if it exists to understand:
 - Tech stack (language, framework, database)
 - Project purpose and architecture
 - Key features and conventions
@@ -40,7 +40,7 @@ Generate, maintain, and improve project documentation following a landing-page R
 
 **Scan for scattered markdown files in project root:**
 
-Use `Glob` to find all `*.md` files in the project root (exclude `node_modules/`, `.ai-factory/`, agent dirs):
+Use `Glob` to find all `*.md` files in the project root (exclude `node_modules/`, `.flz/`, agent dirs):
 
 ```
 CHANGELOG.md, CONTRIBUTING.md, ARCHITECTURE.md, DEPLOYMENT.md,

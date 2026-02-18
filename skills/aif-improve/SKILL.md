@@ -27,12 +27,12 @@ enhanced plan with better tasks, correct dependencies, more detail
 **Locate the active plan file using this priority:**
 
 ```
-1. .ai-factory/PLAN.md exists? → Use it (from /aif-plan fast)
-2. No .ai-factory/PLAN.md → Check current git branch:
+1. .flz/PLAN.md exists? → Use it (from /aif-plan fast)
+2. No .flz/PLAN.md → Check current git branch:
    git branch --show-current
    → Convert branch name to filename: replace "/" with "-", add ".md"
-   → Look for .ai-factory/plans/<branch-name>.md
-   Example: feature/user-auth → .ai-factory/plans/feature-user-auth.md
+   → Look for .flz/plans/<branch-name>.md
+   Example: feature/user-auth → .flz/plans/feature-user-auth.md
 ```
 
 **If NO plan file found at either location:**
@@ -62,7 +62,7 @@ Read the found plan file completely. Understand:
 
 **1.2: Read project context**
 
-Read `.ai-factory/DESCRIPTION.md` if it exists:
+Read `.flz/DESCRIPTION.md` if it exists:
 - Tech stack
 - Architecture
 - Conventions
@@ -71,7 +71,7 @@ Read `.ai-factory/DESCRIPTION.md` if it exists:
 **1.3: Read patches (past mistakes)**
 
 ```
-Glob: .ai-factory/patches/*.md
+Glob: .flz/patches/*.md
 ```
 
 If patches exist, read them to understand:
@@ -317,7 +317,7 @@ Options:
 ```
 User: /aif-improve
 
-→ Found plan: .ai-factory/plans/feature-user-auth.md
+→ Found plan: .flz/plans/feature-user-auth.md
 → 6 tasks in plan
 → Deep codebase analysis...
 → Found: project uses middleware pattern for auth, plan misses middleware task
@@ -337,7 +337,7 @@ Apply? → Yes → Changes applied
 ```
 User: /aif-improve добавь обработку ошибок и валидацию входных данных
 
-→ Found plan: .ai-factory/PLAN.md
+→ Found plan: .flz/PLAN.md
 → 4 tasks in plan
 → User wants: error handling + input validation
 → Analyzing each task for missing error handling...
@@ -357,7 +357,7 @@ Apply? → Yes → Changes applied
 ```
 User: /aif-improve
 
-→ No .ai-factory/PLAN.md found
+→ No .flz/PLAN.md found
 → Branch: main (no feature branch)
 → No plan file found
 
@@ -371,7 +371,7 @@ User: /aif-improve
 ```
 User: /aif-improve
 
-→ Found plan: .ai-factory/plans/feature-product-search.md
+→ Found plan: .flz/plans/feature-product-search.md
 → 5 tasks in plan
 → Deep analysis... all tasks well-defined, dependencies correct
 → No significant improvements found

@@ -90,7 +90,7 @@ Options:
 1. Fix all — Apply all recommendations
 2. Fix critical only — Fix security issues, skip improvements
 3. Show details — Explain each issue before deciding
-4. Export report — Save audit report to .ai-factory/docker-audit.md
+4. Export report — Save audit report to .flz/docker-audit.md
 ```
 
 **If fixing:**

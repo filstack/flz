@@ -58,7 +58,7 @@ Session 1:
   → Creates branch: feature/user-authentication
   → Asks about tests (No), logging (Verbose)
   → Creates 6 tasks
-  → Saves plan to: .ai-factory/plans/feature-user-authentication.md
+  → Saves plan to: .flz/plans/feature-user-authentication.md
   → /aif-implement starts
   → Completes tasks #1, #2, #3
   → User ends session
@@ -66,7 +66,7 @@ Session 1:
 Session 2:
   /aif-implement
   → Detects branch: feature/user-authentication
-  → Reads plan: .ai-factory/plans/feature-user-authentication.md
+  → Reads plan: .flz/plans/feature-user-authentication.md
   → Loads state: 3/6 complete
   → Continues from task #4
   → Completes tasks #4, #5, #6

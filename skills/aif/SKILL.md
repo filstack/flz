@@ -5,7 +5,7 @@ argument-hint: "[project description]"
 allowed-tools: Read Glob Grep Write Bash(mkdir *) Bash(npx skills *) Bash(python *security-scan*) Bash(rm -rf *) Skill WebFetch AskUserQuestion Questions
 ---
 
-# AI Factory - Project Setup
+# FLZ - Project Setup
 
 Set up Claude Code for your project by:
 1. Analyzing the tech stack
@@ -101,7 +101,7 @@ Read these files (if they exist):
 - `prisma/schema.prisma` → Database schema
 - Directory structure (`src/`, `app/`, `api/`, etc.)
 
-**Step 2: Generate .ai-factory/DESCRIPTION.md**
+**Step 2: Generate .flz/DESCRIPTION.md**
 
 Based on analysis, create project specification:
 - Detected stack
@@ -152,8 +152,8 @@ Proceed? [Y/n]
 
 **Step 6: Execute**
 
-1. Create directory: `mkdir -p .ai-factory`
-2. Save `.ai-factory/DESCRIPTION.md`
+1. Create directory: `mkdir -p .flz`
+2. Save `.flz/DESCRIPTION.md`
 3. For each external skill from skills.sh:
    ```bash
    npx skills install {{skills_cli_agent_flag}} <name>
@@ -221,7 +221,7 @@ Based on your project, I recommend:
 - API-only → Fastify/Hono, consider Go for high load
 - Startup/MVP → Next.js + Prisma + Supabase (fast iteration)
 
-**Step 2: Create .ai-factory/DESCRIPTION.md**
+**Step 2: Create .flz/DESCRIPTION.md**
 
 After user confirms choices, create specification:
 
@@ -252,10 +252,10 @@ After user confirms choices, create specification:
 - Security: [relevant security considerations]
 ```
 
-Save to `.ai-factory/DESCRIPTION.md`.
+Save to `.flz/DESCRIPTION.md`.
 
 ```bash
-mkdir -p .ai-factory
+mkdir -p .flz
 ```
 
 **Step 3: Search & Install Skills**
@@ -294,7 +294,7 @@ After getting description, proceed with same stack selection as Mode 2:
 - Database (with recommendation)
 - ORM (with recommendation)
 
-**Step 3: Create .ai-factory/DESCRIPTION.md**
+**Step 3: Create .flz/DESCRIPTION.md**
 
 Same as Mode 2.
 
@@ -354,7 +354,7 @@ Install skills, configure MCP, generate `AGENTS.md`, and generate architecture d
 - Read directory tree (top 2-3 levels)
 - Identify key entry points (main files, config files, schemas)
 - Note existing documentation files
-- Reference `.ai-factory/DESCRIPTION.md` for tech stack
+- Reference `.flz/DESCRIPTION.md` for tech stack
 
 **Template:**
 
@@ -394,8 +394,8 @@ Install skills, configure MCP, generate `AGENTS.md`, and generate architecture d
 | File | Purpose |
 |------|---------|
 | AGENTS.md | This file — project structure map |
-| .ai-factory/DESCRIPTION.md | Project specification and tech stack |
-| .ai-factory/ARCHITECTURE.md | Architecture decisions and guidelines |
+| .flz/DESCRIPTION.md | Project specification and tech stack |
+| .flz/ARCHITECTURE.md | Architecture decisions and guidelines |
 | CLAUDE.md | Claude Code instructions and preferences |
 ```
 
@@ -423,15 +423,15 @@ After DESCRIPTION.md, AGENTS.md, skills, and MCP are configured, **generate the 
 
 **Step 7: Generate Architecture Document**
 
-Invoke `/aif-architecture` to define project architecture. This creates `.ai-factory/ARCHITECTURE.md` with architecture pattern, folder structure, dependency rules, and code examples tailored to the project.
+Invoke `/aif-architecture` to define project architecture. This creates `.flz/ARCHITECTURE.md` with architecture pattern, folder structure, dependency rules, and code examples tailored to the project.
 
 Then tell the user:
 
 ```
 ✅ Project context configured!
 
-Project description: .ai-factory/DESCRIPTION.md
-Architecture: .ai-factory/ARCHITECTURE.md
+Project description: .flz/DESCRIPTION.md
+Architecture: .flz/ARCHITECTURE.md
 Project map: AGENTS.md
 Skills installed: [list]
 MCP configured: [list]

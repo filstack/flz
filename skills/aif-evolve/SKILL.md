@@ -1,6 +1,6 @@
 ---
 name: aif-evolve
-description: Self-improve AI Factory skills based on project context, accumulated patches, and codebase patterns. Analyzes what went wrong, what works, and enhances skills to prevent future issues. Use when you want to make AI smarter for your project.
+description: Self-improve FLZ skills based on project context, accumulated patches, and codebase patterns. Analyzes what went wrong, what works, and enhances skills to prevent future issues. Use when you want to make AI smarter for your project.
 argument-hint: '[skill-name or "all"]'
 allowed-tools: Read Write Edit Glob Grep Bash(git *) AskUserQuestion Questions
 disable-model-invocation: true
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 # Evolve - Skill Self-Improvement
 
-Analyze project context, patches, and codebase to improve existing skills. Makes AI Factory smarter with every run.
+Analyze project context, patches, and codebase to improve existing skills. Makes FLZ smarter with every run.
 
 ## Core Idea
 
@@ -24,7 +24,7 @@ enhance skills with project-specific rules, guards, and patterns
 
 ### Step 0: Load Context
 
-**Read `.ai-factory/DESCRIPTION.md`** to understand:
+**Read `.flz/DESCRIPTION.md`** to understand:
 - Tech stack
 - Architecture
 - Conventions
@@ -34,7 +34,7 @@ enhance skills with project-specific rules, guards, and patterns
 **1.1: Read all patches**
 
 ```
-Glob: .ai-factory/patches/*.md
+Glob: .flz/patches/*.md
 ```
 
 Read every patch. For each one, extract:
@@ -173,10 +173,10 @@ For each approved improvement:
 
 **5.3: Save evolution log**
 
-Create `.ai-factory/evolutions/YYYY-MM-DD-HH.mm.md`:
+Create `.flz/evolutions/YYYY-MM-DD-HH.mm.md`:
 
 ```bash
-mkdir -p .ai-factory/evolutions
+mkdir -p .flz/evolutions
 ```
 
 ```markdown

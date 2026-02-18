@@ -15,8 +15,8 @@ Plans implementation for a feature or task:
 ```
 
 Two modes:
-- **Fast** — no git branch, saves plan to `.ai-factory/PLAN.md`, asks fewer questions
-- **Full** — creates git branch (`feature/user-authentication`), asks about testing/logging/docs, saves plan to `.ai-factory/plans/<branch>.md`
+- **Fast** — no git branch, saves plan to `.flz/PLAN.md`, asks fewer questions
+- **Full** — creates git branch (`feature/user-authentication`), asks about testing/logging/docs, saves plan to `.flz/plans/<branch>.md`
 
 Both modes explore your codebase for patterns, create tasks with dependencies, and include commit checkpoints for 5+ tasks.
 
@@ -25,7 +25,7 @@ Both modes explore your codebase for patterns, create tasks with dependencies, a
 /aif-plan full --parallel Add Stripe checkout
 ```
 - Creates a separate working directory (`../my-project-feature-stripe-checkout`)
-- Copies AI context files (`.ai-factory/`, `.claude/`, `CLAUDE.md`)
+- Copies AI context files (`.flz/`, `.claude/`, `CLAUDE.md`)
 - Each feature gets its own Claude Code session — no branch switching, no conflicts
 
 **Manage parallel features:**
@@ -42,8 +42,8 @@ Creates or updates a strategic project roadmap:
 /aif-roadmap                              # Update existing roadmap (interactive)
 /aif-roadmap check                        # Auto-scan codebase, mark done milestones
 ```
-- Reads `.ai-factory/DESCRIPTION.md` + `ARCHITECTURE.md` for context
-- **First run** — explores codebase, asks for major goals, generates `.ai-factory/ROADMAP.md`
+- Reads `.flz/DESCRIPTION.md` + `ARCHITECTURE.md` for context
+- **First run** — explores codebase, asks for major goals, generates `.flz/ROADMAP.md`
 - **Subsequent runs** — review progress, add milestones, reprioritize, mark completed
 - **`check`** — automated progress scan: analyzes codebase for evidence of completed milestones, reports done/partial/not started, marks completed with confirmation
 - Milestones are high-level goals (not granular tasks — that's `/aif-plan`)
@@ -55,7 +55,7 @@ Refine an existing plan with a second iteration:
 /aif-improve                                    # Auto-review: find gaps, missing tasks, wrong deps
 /aif-improve добавь валидацию и обработку ошибок # Improve based on specific feedback
 ```
-- Finds the active plan (`.ai-factory/PLAN.md` or branch-based `plans/<branch>.md`)
+- Finds the active plan (`.flz/PLAN.md` or branch-based `plans/<branch>.md`)
 - Performs deeper codebase analysis than the initial `/aif-plan` planning
 - Finds missing tasks (migrations, configs, middleware)
 - Fixes task dependencies and descriptions
@@ -70,12 +70,12 @@ Executes the plan:
 /aif-implement 5      # Start from task #5
 /aif-implement status # Check progress
 ```
-- **Reads past patches** from `.ai-factory/patches/` before starting — learns from previous mistakes
-- Finds plan file (.ai-factory/PLAN.md or branch-based)
+- **Reads past patches** from `.flz/patches/` before starting — learns from previous mistakes
+- Finds plan file (.flz/PLAN.md or branch-based)
 - Executes tasks one by one
 - Prompts for commits at checkpoints
 - If plan has `Docs: yes` — runs `/aif-docs` after completion
-- Offers to delete .ai-factory/PLAN.md when done
+- Offers to delete .flz/PLAN.md when done
 
 ### `/aif-verify [--strict]`
 Verifies completed implementation against the plan:
@@ -103,13 +103,13 @@ Bug fix with optional plan-first mode:
 - Investigates codebase to find root cause
 - Applies fix WITH logging (`[FIX]` prefix for easy filtering)
 - Suggests test coverage for the bug
-- Creates a **self-improvement patch** in `.ai-factory/patches/`
+- Creates a **self-improvement patch** in `.flz/patches/`
 
 **Plan-first mode** — for complex bugs or when you want to review the approach:
 ```
 /aif-fix Something is broken    # Choose "Plan first" when asked
 ```
-- Investigates the codebase, creates `.ai-factory/FIX_PLAN.md` with analysis, fix steps, risks
+- Investigates the codebase, creates `.flz/FIX_PLAN.md` with analysis, fix steps, risks
 - Stops after creating the plan — you review it at your own pace
 - When ready, run without arguments to execute the plan:
 ```
@@ -123,11 +123,11 @@ Self-improve skills based on project experience:
 /aif-evolve fix      # Evolve only /aif-fix skill
 /aif-evolve all      # Evolve all skills
 ```
-- Reads all patches from `.ai-factory/patches/` — finds recurring problems
+- Reads all patches from `.flz/patches/` — finds recurring problems
 - Analyzes project tech stack, conventions, and codebase patterns
 - Identifies gaps in existing skills (missing guards, tech-specific pitfalls)
 - Proposes targeted improvements with user approval
-- Saves evolution log to `.ai-factory/evolutions/`
+- Saves evolution log to `.flz/evolutions/`
 - The more `/aif-fix` patches you accumulate, the smarter `/aif-evolve` becomes
 
 ---
@@ -146,8 +146,8 @@ When called with a description:
 ```
 /aif e-commerce platform with Stripe and Next.js
 ```
-- Creates `.ai-factory/DESCRIPTION.md` with enhanced project specification
-- Creates `.ai-factory/ARCHITECTURE.md` with architecture decisions and guidelines
+- Creates `.flz/DESCRIPTION.md` with enhanced project specification
+- Creates `.flz/ARCHITECTURE.md` with architecture decisions and guidelines
 - Transforms your idea into a structured, professional description
 
 **Does NOT implement your project** - only sets up context.
@@ -159,9 +159,9 @@ Generates architecture guidelines tailored to your project:
 /aif-architecture clean     # Use Clean Architecture
 /aif-architecture monolith  # Use Modular Monolith
 ```
-- Reads `.ai-factory/DESCRIPTION.md` for project context
+- Reads `.flz/DESCRIPTION.md` for project context
 - Recommends architecture pattern based on team size, domain complexity, and tech stack
-- Generates `.ai-factory/ARCHITECTURE.md` with folder structure, dependency rules, code examples
+- Generates `.flz/ARCHITECTURE.md` with folder structure, dependency rules, code examples
 - All examples adapted to your project's language and framework
 - Called automatically by `/aif` during setup, but can also be used standalone
 
@@ -288,7 +288,7 @@ Adds project-specific rules and conventions:
 /aif-rules Always use DTO instead of arrays
 /aif-rules                                    # Interactive — asks what to add
 ```
-- Rules are saved to `.ai-factory/RULES.md`
+- Rules are saved to `.flz/RULES.md`
 - Each invocation appends a new rule
 - Rules are automatically loaded by `/aif-implement` before task execution
 - Use for coding conventions, naming rules, architectural constraints
@@ -341,6 +341,6 @@ Each category includes a checklist, vulnerable/safe code examples (TypeScript, P
 ```
 /aif-security-checklist ignore no-csrf
 ```
-- Asks for a reason, saves to `.ai-factory/SECURITY.md`
+- Asks for a reason, saves to `.flz/SECURITY.md`
 - Future audits skip these items but still show them in an **"Ignored Items"** section for transparency
 - Review ignored items periodically — risks change over time

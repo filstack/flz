@@ -25,7 +25,7 @@ export class AntigravityTransformer implements AgentTransformer {
   async postInstall(projectDir: string): Promise<void> {
     const rulesDir = path.join(projectDir, '.agent', 'rules');
 
-    const guardrailsContent = `# AI Factory Guardrails
+    const guardrailsContent = `# FLZ Guardrails
 
 ## Project Conventions
 
@@ -50,11 +50,11 @@ export class AntigravityTransformer implements AgentTransformer {
 - Always create feature branches for new work
 `;
 
-    const conventionsContent = `# AI Factory Conventions
+    const conventionsContent = `# FLZ Conventions
 
 ## Workflow Structure
 
-AI Factory organizes skills into three categories:
+FLZ organizes skills into three categories:
 
 ### Workflows (.agent/workflows/)
 Action-oriented skills that execute specific tasks:
