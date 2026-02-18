@@ -4,8 +4,6 @@
 
 FLZ provides a set of **workflow skills** that form the core development loop: plan, improve, implement, fix, evolve. Each skill is a step in the pipeline — they connect to each other and share context through plan files and patches.
 
-![workflow](https://github.com/lee-to/flz/raw/main/art/workflow.png)
-
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                         AI FACTORY WORKFLOW                             │
